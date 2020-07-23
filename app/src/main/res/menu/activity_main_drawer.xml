@@ -5,12 +5,12 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_names_content"
-            android:title="Толкование имён" />
-
-        <item
             android:id="@+id/nav_book_content"
             android:title="Основной материал" />
+
+        <item
+            android:id="@+id/nav_names_content"
+            android:title="Толкование имён" />
 
         <item
             android:id="@+id/nav_name_flip_card"
