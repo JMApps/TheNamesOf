@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_names_content">
+
+    <fragment
+        android:id="@+id/nav_names_content"
+        android:name="jmapps.thenamesof.ui.main.MainFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_book_content"
+        android:name="jmapps.thenamesof.ui.content.GalleryFragment"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_name_flip_card"
+        android:name="jmapps.thenamesof.ui.flip.SlideshowFragment"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_name_input_card"
+        android:name="jmapps.thenamesof.ui.flip.SlideshowFragment"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_quiz"
+        android:name="jmapps.thenamesof.ui.flip.SlideshowFragment"
+        tools:layout="@layout/fragment_slideshow" />
+</navigation>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_names_content"
+            android:title="Толкование имён" />
+
+        <item
+            android:id="@+id/nav_book_content"
+            android:title="Основной материал" />
+
+        <item
+            android:id="@+id/nav_name_flip_card"
+            android:title="Карточки" />
+
+        <item
+            android:id="@+id/nav_name_input_card"
+            android:title="Ввод имён" />
+
+        <item
+            android:id="@+id/nav_quiz"
+            android:title="Викторина" />
+    </group>
+
+    <item android:title="Дополнительно">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:title="О нас" />
+            <item
+                android:id="@+id/nav_rate"
+                android:title="Оценить" />
+            <item
+                android:id="@+id/nav_share"
+                android:title="Поделиться" />
+        </menu>
+    </item>
+</menu>
