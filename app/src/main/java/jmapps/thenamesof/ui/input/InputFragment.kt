@@ -1,4 +1,4 @@
-package jmapps.thenamesof.ui.main
+package jmapps.thenamesof.ui.input
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,20 +11,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import jmapps.thenamesof.R
+import jmapps.thenamesof.databinding.FragmentContentBinding
 import jmapps.thenamesof.databinding.FragmentInputBinding
-import jmapps.thenamesof.databinding.FragmentMainBinding
-import jmapps.thenamesof.ui.input.InputViewModel
+import jmapps.thenamesof.ui.flip.FlipViewModel
 
-class MainFragment : Fragment() {
+class InputFragment : Fragment() {
 
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var binding: FragmentMainBinding
+    private lateinit var inputViewModel: InputViewModel
+    private lateinit var binding: FragmentInputBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
+        inputViewModel = ViewModelProvider(this).get(InputViewModel::class.java)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_input, container, false)
 
-        mainViewModel.text.observe(viewLifecycleOwner, Observer {
+        inputViewModel.text.observe(viewLifecycleOwner, Observer {
             binding.mainTextView.text = it
         })
 

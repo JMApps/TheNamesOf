@@ -1,13 +1,14 @@
-package jmapps.thenamesof.ui.flip
+package jmapps.thenamesof.ui.quiz
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SlideshowViewModel : ViewModel() {
+class QuizViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
+        value = "Викторина"
     }
+
     val text: LiveData<String> = _text
 }

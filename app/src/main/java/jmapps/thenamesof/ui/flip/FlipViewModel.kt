@@ -1,13 +1,13 @@
-package jmapps.thenamesof.ui.main
+package jmapps.thenamesof.ui.flip
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
+class FlipViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Толкование имен"
+        value = "Карточки"
     }
 
     val text: LiveData<String> = _text
