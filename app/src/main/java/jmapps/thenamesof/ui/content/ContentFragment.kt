@@ -23,7 +23,7 @@ class ContentFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_content, container, false)
 
         contentViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.mainTextView.text = it
+
         })
 
         return binding.root
