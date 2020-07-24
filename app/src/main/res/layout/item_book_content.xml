@@ -15,6 +15,7 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/tvNumberBookContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -23,6 +24,7 @@
             tools:text="1" />
 
         <TextView
+            android:id="@+id/tvTitleBookContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
