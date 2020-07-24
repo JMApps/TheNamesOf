@@ -14,6 +14,7 @@ import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.FragmentInputBinding
 import jmapps.thenamesof.databinding.FragmentMainBinding
 import jmapps.thenamesof.ui.input.InputViewModel
+import jmapps.thenamesof.ui.main.adapter.MainContentPagerAdapter
 
 class MainFragment : Fragment() {
 
@@ -24,8 +25,10 @@ class MainFragment : Fragment() {
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
+        val mainContentPagerAdapter = MainContentPagerAdapter(childFragmentManager)
+        binding.mainContentViewPager.adapter = mainContentPagerAdapter
+
         mainViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.mainTextView.text = it
         })
 
         return binding.root
