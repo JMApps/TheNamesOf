@@ -25,7 +25,7 @@ class FlipFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_flip, container, false)
 
         flipViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.mainTextView.text = it
+
         })
 
         return binding.root
