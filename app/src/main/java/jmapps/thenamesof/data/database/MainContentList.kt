@@ -29,7 +29,7 @@ class MainContentList(private val database: SQLiteDatabase) {
                         cursor.getInt(cursor.getColumnIndex("_id")),
                         cursor.getString(cursor.getColumnIndex("ContentNumber")),
                         cursor.getString(cursor.getColumnIndex("ContentTitle")),
-                        cursor.getString(cursor.getColumnIndex("ContentList"))
+                        cursor.getString(cursor.getColumnIndex("Content"))
                     )
                     contentList.add(contents)
                     cursor.moveToNext()

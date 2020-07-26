@@ -1,31 +1,44 @@
 package jmapps.thenamesof.ui.content
 
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import jmapps.thenamesof.R
+import jmapps.thenamesof.data.database.DBOpenMainContent
+import jmapps.thenamesof.data.database.MainContentList
 import jmapps.thenamesof.databinding.FragmentContentBinding
+import jmapps.thenamesof.ui.content.adapter.ContentRecyclerViewAdapter
+import jmapps.thenamesof.ui.content.model.ModelContent
 
-class ContentFragment : Fragment() {
+class ContentFragment : Fragment(), ContentRecyclerViewAdapter.ContentItemClick {
 
-    private lateinit var contentViewModel: ContentViewModel
     private lateinit var binding: FragmentContentBinding
+    private lateinit var database: SQLiteDatabase
+
+    private lateinit var contentList: MutableList<ModelContent>
+    private lateinit var contentAdapter: ContentRecyclerViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        contentViewModel = ViewModelProvider(this).get(ContentViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_content, container, false)
 
-        contentViewModel.text.observe(viewLifecycleOwner, Observer {
+        database = DBOpenMainContent(context).readableDatabase
+        contentList = MainContentList(database).getContentList
 
-        })
+        val verticalLayout  = LinearLayoutManager(context)
+        binding.rvMainContentTitles.layoutManager = verticalLayout
+
+        contentAdapter = ContentRecyclerViewAdapter(requireContext(), contentList, this)
+        binding.rvMainContentTitles.adapter = contentAdapter
 
         return binding.root
+    }
+
+    override fun contentItemClick(contentId: Int) {
+
     }
 }
