@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             tools:text="1" />
 
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             tools:text="Название главы" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
