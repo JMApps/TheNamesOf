@@ -2,6 +2,7 @@ package jmapps.thenamesof.ui.content.activities
 
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,8 +12,8 @@ import jmapps.thenamesof.data.database.DBOpenMainContent
 import jmapps.thenamesof.data.database.MainContentList
 import jmapps.thenamesof.databinding.ActivityContentBinding
 import jmapps.thenamesof.ui.content.adapter.ContentPagerAdapter
+import jmapps.thenamesof.ui.content.fragments.SettingsContentBottomSheet
 import jmapps.thenamesof.ui.content.model.ModelContent
-import jmapps.thenamesof.ui.main.adapter.MainContentPagerAdapter
 
 class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
@@ -27,7 +28,7 @@ class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val getContentId = intent.getIntExtra(keyContentId, 0)
+        val getContentId = intent.getIntExtra(keyContentId, 1)
 
         database = DBOpenMainContent(this).readableDatabase
         contentList = MainContentList(database).getContentList
@@ -44,15 +45,21 @@ class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         binding.contentViewPager.addOnPageChangeListener(this)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.content, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
+
+            R.id.action_settings_content -> {
+                val contentSettings = SettingsContentBottomSheet()
+                contentSettings.show(supportFragmentManager, SettingsContentBottomSheet.keyContentSettings)
+            }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    companion object {
-        const val keyContentId = "key_content_id"
     }
 
     override fun onPageScrollStateChanged(state: Int) {}
@@ -61,5 +68,9 @@ class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     override fun onPageSelected(position: Int) {
         binding.tvContentTitle.text = contentList[position].contentTitle
+    }
+
+    companion object {
+        const val keyContentId = "key_content_id"
     }
 }
