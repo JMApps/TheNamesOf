@@ -15,7 +15,7 @@ class MainContainerFragment : Fragment() {
 
     companion object {
 
-        private const val ARG_CONTENT_NUMBER = "content_number"
+        private const val ARG_CONTENT_NUMBER = "main_content_number"
 
         @JvmStatic
         fun newInstance(dataNumber: Int): MainContainerFragment {
