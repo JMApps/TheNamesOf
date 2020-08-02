@@ -1,4 +1,4 @@
-package jmapps.thenamesof.ui.content
+package jmapps.thenamesof.ui.content.fragments
 
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase

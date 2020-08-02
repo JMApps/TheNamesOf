@@ -12,7 +12,7 @@
 
     <fragment
         android:id="@+id/nav_book_content"
-        android:name="jmapps.thenamesof.ui.content.ContentFragment"
+        android:name="jmapps.thenamesof.ui.content.fragments.ContentFragment"
         tools:layout="@layout/fragment_content" />
 
     <fragment
