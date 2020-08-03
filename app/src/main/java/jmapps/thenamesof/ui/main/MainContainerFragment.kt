@@ -12,6 +12,8 @@ import jmapps.thenamesof.R
 import jmapps.thenamesof.data.database.DBOpenMainContent
 import jmapps.thenamesof.data.database.MainContentList
 import jmapps.thenamesof.databinding.FragmentMainContainerBinding
+import jmapps.thenamesof.ui.main.ayahs.adapter.MainAyahsAdapter
+import jmapps.thenamesof.ui.main.ayahs.model.MainAyahsModel
 import jmapps.thenamesof.ui.main.names.adapter.MainNamesAdapter
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 
@@ -24,6 +26,9 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick {
 
     private lateinit var mainNameList: MutableList<MainNamesModel>
     private lateinit var mainNamesAdapter: MainNamesAdapter
+
+    private lateinit var mainAyahList: MutableList<MainAyahsModel>
+    private lateinit var mainAyahsAdapter: MainAyahsAdapter
 
     companion object {
 
@@ -46,16 +51,23 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick {
 
         database = DBOpenMainContent(context).readableDatabase
         mainNameList = MainContentList(database).getMainNamesList(sectionNumber)
+        mainAyahList = MainContentList(database).getMainAyahsList(sectionNumber)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_container, container, false)
 
-        val verticalLayout  = LinearLayoutManager(context)
-        binding.rvMainNames.layoutManager = verticalLayout
+        val verticalLayoutNames  = LinearLayoutManager(context)
+        binding.rvMainNames.layoutManager = verticalLayoutNames
+
+        val verticalLayoutAyahs  = LinearLayoutManager(context)
+        binding.rvMainAyahs.layoutManager = verticalLayoutAyahs
 
         mainNamesAdapter = MainNamesAdapter(requireContext(), mainNameList, this)
         binding.rvMainNames.adapter = mainNamesAdapter
+
+        mainAyahsAdapter = MainAyahsAdapter(requireContext(), mainAyahList)
+        binding.rvMainAyahs.adapter = mainAyahsAdapter
 
         return binding.root
     }
