@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
 import jmapps.thenamesof.R
-import jmapps.thenamesof.data.database.DBOpenMainContent
-import jmapps.thenamesof.data.database.MainContentList
+import jmapps.thenamesof.data.database.ContentList
+import jmapps.thenamesof.data.database.DBOpenContent
 import jmapps.thenamesof.databinding.ActivityContentBinding
 import jmapps.thenamesof.ui.content.adapter.ContentPagerAdapter
 import jmapps.thenamesof.ui.content.fragments.SettingsContentBottomSheet
@@ -30,8 +30,8 @@ class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
         val getContentId = intent.getIntExtra(keyContentId, 1)
 
-        database = DBOpenMainContent(this).readableDatabase
-        contentList = MainContentList(database).getContentList
+        database = DBOpenContent(this).readableDatabase
+        contentList = ContentList(database).getContentList
 
         val contentPagerAdapter = ContentPagerAdapter(supportFragmentManager)
         binding.contentViewPager.adapter = contentPagerAdapter
