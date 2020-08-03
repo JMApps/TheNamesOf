@@ -89,5 +89,12 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
     }
 
     override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
+        if (oldScrollY < scrollY) {
+            binding.fabMainChapters.hide()
+            binding.fabMainFavorites.hide()
+        } else {
+            binding.fabMainChapters.show()
+            binding.fabMainFavorites.show()
+        }
     }
 }
