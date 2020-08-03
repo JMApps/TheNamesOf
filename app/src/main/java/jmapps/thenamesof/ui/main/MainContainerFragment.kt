@@ -6,6 +6,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,8 @@ import jmapps.thenamesof.ui.main.model.MainContentModel
 import jmapps.thenamesof.ui.main.names.adapter.MainNamesAdapter
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 
-class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick {
+class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
+    NestedScrollView.OnScrollChangeListener {
 
     private var sectionNumber: Int? = 0
 
@@ -77,10 +79,15 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick {
         binding.tvChapterNumber.text = Html.fromHtml(mainContentList[sectionNumber!! - 1].chapterNumber)
         binding.tvChapterContent.text = Html.fromHtml(mainContentList[sectionNumber!! - 1].chapterContent)
 
+        binding.nsMainContent.setOnScrollChangeListener(this)
+
         return binding.root
     }
 
     override fun mainNameClick(mainNameId: Int) {
 
+    }
+
+    override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
     }
 }
