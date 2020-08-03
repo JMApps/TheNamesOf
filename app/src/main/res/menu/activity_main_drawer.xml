@@ -6,36 +6,44 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_book_content"
-            android:title="Основной материал" />
+            android:icon="@drawable/ic_content"
+            android:title="@string/nav_title_content" />
 
         <item
             android:id="@+id/nav_names_content"
-            android:title="Толкование имён" />
+            android:icon="@drawable/ic_main"
+            android:title="@string/nav_title_main" />
 
         <item
             android:id="@+id/nav_name_flip_card"
-            android:title="Карточки" />
+            android:icon="@drawable/ic_card"
+            android:title="@string/nav_title_card" />
 
         <item
             android:id="@+id/nav_name_input_card"
-            android:title="Ввод имён" />
+            android:icon="@drawable/ic_input"
+            android:title="@string/nav_title_input" />
 
         <item
             android:id="@+id/nav_quiz"
-            android:title="Викторина" />
+            android:icon="@drawable/ic_quiz"
+            android:title="@string/nav_title_quiz" />
     </group>
 
-    <item android:title="Дополнительно">
+    <item android:title="@string/nav_title_additionally">
         <menu>
             <item
                 android:id="@+id/nav_about_us"
-                android:title="О нас" />
+                android:icon="@drawable/ic_about"
+                android:title="@string/nav_title_about_us" />
             <item
                 android:id="@+id/nav_rate"
-                android:title="Оценить" />
+                android:icon="@drawable/ic_rate"
+                android:title="@string/nav_title_rate" />
             <item
                 android:id="@+id/nav_share"
-                android:title="Поделиться" />
+                android:icon="@drawable/ic_share"
+                android:title="@string/nav_title_share" />
         </menu>
     </item>
 </menu>
