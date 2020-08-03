@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_favorites_white"
+            android:src="@drawable/ic_bookmarks_white"
             app:fabSize="normal" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
