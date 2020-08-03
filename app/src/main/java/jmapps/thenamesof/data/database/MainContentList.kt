@@ -1,9 +1,12 @@
 package jmapps.thenamesof.data.database
 
+import android.annotation.SuppressLint
 import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
+import jmapps.thenamesof.ui.content.model.ModelContent
 import jmapps.thenamesof.ui.main.ayahs.model.MainAyahsModel
+import jmapps.thenamesof.ui.main.model.MainContentModel
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 
 class MainContentList(private val database: SQLiteDatabase) {
@@ -78,5 +81,42 @@ class MainContentList(private val database: SQLiteDatabase) {
 
         }
         return mainAyahs
+    }
+
+    val getMainContentList: MutableList<MainContentModel>
+
+        @SuppressLint("Recycle")
+        get() {
+
+        val cursor: Cursor = database.query(
+            "Table_of_chapters",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        val mainContents = ArrayList<MainContentModel>()
+
+        try {
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast) {
+                    val contents = MainContentModel(
+                        cursor.getString(cursor.getColumnIndex("ChapterNumber")),
+                        cursor.getString(cursor.getColumnIndex("ChapterContent"))
+                    )
+                    mainContents.add(contents)
+                    cursor.moveToNext()
+                    if (cursor.isClosed) {
+                        cursor.close()
+                    }
+                }
+            }
+        } catch (e: SQLException) {
+
+        }
+        return mainContents
     }
 }

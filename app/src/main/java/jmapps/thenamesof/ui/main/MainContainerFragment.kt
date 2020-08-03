@@ -2,6 +2,7 @@ package jmapps.thenamesof.ui.main
 
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import jmapps.thenamesof.data.database.MainContentList
 import jmapps.thenamesof.databinding.FragmentMainContainerBinding
 import jmapps.thenamesof.ui.main.ayahs.adapter.MainAyahsAdapter
 import jmapps.thenamesof.ui.main.ayahs.model.MainAyahsModel
+import jmapps.thenamesof.ui.main.model.MainContentModel
 import jmapps.thenamesof.ui.main.names.adapter.MainNamesAdapter
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 
@@ -29,6 +31,8 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick {
 
     private lateinit var mainAyahList: MutableList<MainAyahsModel>
     private lateinit var mainAyahsAdapter: MainAyahsAdapter
+
+    private lateinit var mainContentList: MutableList<MainContentModel>
 
     companion object {
 
@@ -52,6 +56,7 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick {
         database = DBOpenMainContent(context).readableDatabase
         mainNameList = MainContentList(database).getMainNamesList(sectionNumber)
         mainAyahList = MainContentList(database).getMainAyahsList(sectionNumber)
+        mainContentList = MainContentList(database).getMainContentList
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -68,6 +73,9 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick {
 
         mainAyahsAdapter = MainAyahsAdapter(requireContext(), mainAyahList)
         binding.rvMainAyahs.adapter = mainAyahsAdapter
+
+        binding.tvChapterNumber.text = Html.fromHtml(mainContentList[sectionNumber!! - 1].chapterNumber)
+        binding.tvChapterContent.text = Html.fromHtml(mainContentList[sectionNumber!! - 1].chapterContent)
 
         return binding.root
     }

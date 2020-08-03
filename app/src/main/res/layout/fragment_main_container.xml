@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -31,7 +32,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_weight="1"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <ToggleButton
                     android:id="@+id/btnFavorite"
@@ -70,11 +71,23 @@
                 android:layout_height="wrap_content"
                 android:overScrollMode="never" />
 
-            <TextView
-                android:id="@+id/tvMainContent"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp" />
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="2dp">
+
+                <TextView
+                    android:id="@+id/tvChapterContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="24dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="24dp"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
