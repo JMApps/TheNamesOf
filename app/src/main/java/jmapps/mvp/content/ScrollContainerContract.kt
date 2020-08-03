@@ -4,8 +4,6 @@ import android.content.SharedPreferences
 
 class ScrollContainerContract {
 
-    interface ScrollView
-
     interface ScrollPresenter {
 
         fun scrollCount()
