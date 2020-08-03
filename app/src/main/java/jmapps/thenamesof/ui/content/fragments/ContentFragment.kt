@@ -10,8 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import jmapps.thenamesof.R
-import jmapps.thenamesof.data.database.DBOpenContent
 import jmapps.thenamesof.data.database.ContentList
+import jmapps.thenamesof.data.database.DBOpenContent
 import jmapps.thenamesof.databinding.FragmentContentBinding
 import jmapps.thenamesof.ui.content.activities.ContentActivity
 import jmapps.thenamesof.ui.content.adapter.ContentRecyclerViewAdapter
@@ -25,11 +25,15 @@ class ContentFragment : Fragment(), ContentRecyclerViewAdapter.ContentItemClick 
     private lateinit var contentList: MutableList<ModelContent>
     private lateinit var contentAdapter: ContentRecyclerViewAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_content, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
         database = DBOpenContent(context).readableDatabase
         contentList = ContentList(database).getContentList
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_content, container, false)
 
         val verticalLayout  = LinearLayoutManager(context)
         binding.rvMainContentTitles.layoutManager = verticalLayout

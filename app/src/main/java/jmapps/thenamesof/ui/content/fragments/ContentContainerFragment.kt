@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import jmapps.mvp.content.ScrollReadPresenterImpl
 import jmapps.thenamesof.R
-import jmapps.thenamesof.data.database.DBOpenMainContent
 import jmapps.thenamesof.data.database.ContentList
+import jmapps.thenamesof.data.database.DBOpenContent
 import jmapps.thenamesof.databinding.FragmentContentContainerBinding
 import jmapps.thenamesof.ui.content.model.ModelContent
 
@@ -54,7 +54,7 @@ class ContentContainerFragment : Fragment(), SharedPreferences.OnSharedPreferenc
         editor = preferences.edit()
         PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(this)
 
-        database = DBOpenMainContent(requireContext()).readableDatabase
+        database = DBOpenContent(requireContext()).readableDatabase
         contentList = ContentList(database).getContentList
 
         scrollReadPresenterImpl = ScrollReadPresenterImpl(sectionNumber!!, binding.nvContentContainer, binding.pbReadProgress)
