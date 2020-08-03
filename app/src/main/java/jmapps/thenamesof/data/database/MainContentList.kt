@@ -1,43 +1,46 @@
 package jmapps.thenamesof.data.database
 
-import android.annotation.SuppressLint
 import android.database.Cursor
+import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
-import jmapps.thenamesof.ui.content.model.ModelContent
+import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 
 class MainContentList(private val database: SQLiteDatabase) {
 
-    val getContentList: MutableList<ModelContent>
+    fun getMainNamesList(sortedBy: Int?): MutableList<MainNamesModel> {
 
-        @SuppressLint("Recycle")
-        get() {
-            val cursor: Cursor = database.query(
-                "Table_of_content",
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-            )
+        val cursor: Cursor = database.query(
+            "Table_of_names",
+            null,
+            "SortedBy = $sortedBy",
+            null,
+            null,
+            null,
+            null
+        )
 
-            val contentList = ArrayList<ModelContent>()
+        val mainNames = ArrayList<MainNamesModel>()
 
+        try {
             if (cursor.moveToFirst()) {
                 while (!cursor.isAfterLast) {
-                    val contents = ModelContent(
-                        cursor.getInt(cursor.getColumnIndex("_id")),
-                        cursor.getString(cursor.getColumnIndex("ContentNumber")),
-                        cursor.getString(cursor.getColumnIndex("ContentTitle")),
-                        cursor.getString(cursor.getColumnIndex("Content"))
+                    val names = MainNamesModel(
+                        cursor.getInt(cursor.getColumnIndex("id")),
+                        cursor.getString(cursor.getColumnIndex("NameArabic")),
+                        cursor.getString(cursor.getColumnIndex("NameTranscription")),
+                        cursor.getString(cursor.getColumnIndex("NameTranslation")),
+                        cursor.getString(cursor.getColumnIndex("NameAudio"))
                     )
-                    contentList.add(contents)
+                    mainNames.add(names)
                     cursor.moveToNext()
                     if (cursor.isClosed) {
                         cursor.close()
                     }
                 }
             }
-            return contentList
+        } catch (e: SQLException) {
+
         }
+        return mainNames
+    }
 }
