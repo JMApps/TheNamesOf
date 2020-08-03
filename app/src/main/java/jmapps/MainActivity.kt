@@ -1,4 +1,4 @@
-package jmapps.thenamesof
+package jmapps
 
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +19,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main
+        )
         setSupportActionBar(binding.appBarMain.toolbar)
 
         val navController = findNavController(R.id.main_fragment_container)

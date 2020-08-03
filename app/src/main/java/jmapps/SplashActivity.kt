@@ -1,9 +1,8 @@
-package jmapps.thenamesof.ui
+package jmapps
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import jmapps.thenamesof.MainActivity
 
 class SplashActivity : Activity() {
 
