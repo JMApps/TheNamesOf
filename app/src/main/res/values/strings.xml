@@ -2,9 +2,24 @@
     <string name="app_name">Имена Аллаха</string>
     <string name="action_main_content">Основной материал</string>
 
+    <!--    Main-->
+    <string name="action_night_mode">Ночной режим</string>
+    <string name="action_settings">Настройки</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Настройки</string>
+    <!--    Settings-->
     <string name="description_text_size">Размер текста</string>
+
+    <!--    Navigation items-->
+    <string name="nav_title_content">Основной материал</string>
+    <string name="nav_title_main">Толкование имён</string>
+    <string name="nav_title_card">Карточки</string>
+    <string name="nav_title_input">Ввод имён</string>
+    <string name="nav_title_quiz">Викторина</string>
+    <string name="nav_title_additionally">Дополнительно</string>
+    <string name="nav_title_about_us">О нас</string>
+    <string name="nav_title_rate">Оценить</string>
+    <string name="nav_title_share">Поделиться</string>
 </resources>
