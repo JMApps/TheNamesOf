@@ -18,10 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
             android:gravity="center"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/ivPlayName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,24 +31,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/ivPlayName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvMainArabicName" />
 
         <TextView
-            android:id="@+id/tvMainTranslateName"
+            android:id="@+id/tvMainTranslationName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivPlayName"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +58,7 @@
             android:layout_height="25dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_play_gray"
-            app:layout_constraintBottom_toBottomOf="@+id/tvMainTranslateName"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMainTranslationName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvMainArabicName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
