@@ -19,6 +19,7 @@
     <string name="nav_title_input">Ввод имён</string>
     <string name="nav_title_quiz">Викторина</string>
     <string name="nav_title_additionally">Дополнительно</string>
+    <string name="nav_title_download_audio">Скачать все аудио</string>
     <string name="nav_title_about_us">О нас</string>
     <string name="nav_title_rate">Оценить</string>
     <string name="nav_title_share">Поделиться</string>

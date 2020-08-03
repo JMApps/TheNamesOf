@@ -33,6 +33,10 @@
     <item android:title="@string/nav_title_additionally">
         <menu>
             <item
+                android:id="@+id/nav_download_audio"
+                android:icon="@drawable/ic_cloud"
+                android:title="@string/nav_title_download_audio" />
+            <item
                 android:id="@+id/nav_about_us"
                 android:icon="@drawable/ic_about"
                 android:title="@string/nav_title_about_us" />
