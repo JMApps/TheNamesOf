@@ -7,8 +7,8 @@
         android:topRightRadius="50dp" />
 
     <size
-        android:width="1.5dp"
-        android:height="1.5dp" />
+        android:width="3dp"
+        android:height="3dp" />
     <padding
         android:paddingLeft="3dp"
         android:paddingRight="3dp" />

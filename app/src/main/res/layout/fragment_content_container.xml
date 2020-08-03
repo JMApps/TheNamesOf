@@ -14,10 +14,10 @@
             android:id="@+id/pbReadProgress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:progress="67" />
+            android:layout_height="2dp" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nvContentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbarThumbVertical="@drawable/thumb_line_background"
@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="16dp"
+                android:textIsSelectable="true"
                 android:textSize="16sp" />
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
