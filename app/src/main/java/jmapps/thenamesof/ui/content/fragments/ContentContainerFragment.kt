@@ -1,5 +1,6 @@
 package jmapps.thenamesof.ui.content.fragments
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
+import jmapps.mvp.content.ScrollReadPresenterImpl
 import jmapps.thenamesof.R
 import jmapps.thenamesof.data.database.DBOpenMainContent
 import jmapps.thenamesof.data.database.MainContentList
@@ -19,10 +21,12 @@ import jmapps.thenamesof.ui.content.model.ModelContent
 class ContentContainerFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var binding: FragmentContentContainerBinding
+    private lateinit var scrollReadPresenterImpl: ScrollReadPresenterImpl
     private lateinit var database: SQLiteDatabase
     private lateinit var contentList: MutableList<ModelContent>
 
     private lateinit var preferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     private var textSizeValues = (16..34).toList().filter { it % 2 == 0 }
 
@@ -41,18 +45,24 @@ class ContentContainerFragment : Fragment(), SharedPreferences.OnSharedPreferenc
         }
     }
 
+    @SuppressLint("CommitPrefEdits")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_content_container, container, false)
         val sectionNumber = arguments?.getInt(ARG_CONTENT_NUMBER)
 
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        editor = preferences.edit()
         PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(this)
 
         database = DBOpenMainContent(requireContext()).readableDatabase
         contentList = MainContentList(database).getContentList
 
+        scrollReadPresenterImpl = ScrollReadPresenterImpl(sectionNumber!!, binding.nvContentContainer, binding.pbReadProgress)
+        scrollReadPresenterImpl.scrollCount()
+        scrollReadPresenterImpl.loadLastCount(preferences)
+
         getContentTextSize()
-        binding.tvContentText.text = Html.fromHtml(contentList[sectionNumber!! - 1].content)
+        binding.tvContentText.text = Html.fromHtml(contentList[sectionNumber - 1].content)
 
         return binding.root
     }
@@ -64,5 +74,10 @@ class ContentContainerFragment : Fragment(), SharedPreferences.OnSharedPreferenc
     private fun getContentTextSize() {
         val lastContentTextSize = preferences.getInt(SettingsContentBottomSheet.keyContentTextSize, 0)
         binding.tvContentText.textSize = textSizeValues[lastContentTextSize].toFloat()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scrollReadPresenterImpl.saveLastCount(editor)
     }
 }
