@@ -2,6 +2,7 @@ package jmapps
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -11,8 +12,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityMainBinding
+import jmapps.thenamesof.ui.main.MainFragment
+import jmapps.thenamesof.ui.main.chapters.MainContentChaptersBottomSheet
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContentChaptersBottomSheet.ToMainContentViewPager {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -48,5 +51,9 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.main_fragment_container)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun toMainContentViewPager(currentItem: Int) {
+        Toast.makeText(this, "yes = $currentItem", Toast.LENGTH_SHORT).show()
     }
 }

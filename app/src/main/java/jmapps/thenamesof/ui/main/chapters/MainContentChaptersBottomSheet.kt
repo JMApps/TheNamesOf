@@ -1,5 +1,6 @@
 package jmapps.thenamesof.ui.main.chapters
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.text.Editable
@@ -7,8 +8,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -16,7 +15,6 @@ import jmapps.thenamesof.R
 import jmapps.thenamesof.data.database.DBOpenMainContent
 import jmapps.thenamesof.data.database.MainContentList
 import jmapps.thenamesof.databinding.BottomSheetMainContentChaptersBinding
-import jmapps.thenamesof.ui.main.ayahs.adapter.MainAyahsAdapter
 import jmapps.thenamesof.ui.main.chapters.adapter.MainChaptersAdapter
 import jmapps.thenamesof.ui.main.chapters.model.MainChaptersModel
 
@@ -31,6 +29,8 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
 
     private lateinit var mainChapterList: MutableList<MainChaptersModel>
     private lateinit var mainChaptersAdapter: MainChaptersAdapter
+
+    private lateinit var toMainContentViewPager: ToMainContentViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,7 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
     }
 
     override fun itemChapterClick(mainChapterId: Int) {
-        Toast.makeText(requireContext(), "To chapter = $mainChapterId", Toast.LENGTH_SHORT).show()
+        toMainContentViewPager.toMainContentViewPager(mainChapterId)
     }
 
     override fun afterTextChanged(s: Editable?) {}
@@ -63,6 +63,17 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         mainChaptersAdapter.filter.filter(s.toString())
+    }
+
+    interface ToMainContentViewPager {
+        fun toMainContentViewPager(currentItem: Int)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ToMainContentViewPager) {
+            toMainContentViewPager = context
+        } else throw RuntimeException("$context must implement this interface")
     }
 
     companion object {
