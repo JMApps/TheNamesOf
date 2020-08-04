@@ -5,6 +5,10 @@
     <!--    Main-->
     <string name="action_night_mode">Ночной режим</string>
     <string name="action_settings">Настройки</string>
+    <string name="action_chapter_list">Список глав</string>
+    <string name="action_bookmark_list">Избранные главы</string>
+    <string name="action_search_by_chapters">Поиск по главам…</string>
+    <string name="action_bookmarks_empty">Избранных глав нет</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
