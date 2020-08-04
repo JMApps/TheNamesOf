@@ -2,10 +2,13 @@ package jmapps.thenamesof.ui.main.chapters
 
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,7 +21,7 @@ import jmapps.thenamesof.ui.main.chapters.adapter.MainChaptersAdapter
 import jmapps.thenamesof.ui.main.chapters.model.MainChaptersModel
 
 class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
-    MainChaptersAdapter.OnItemMainChapterClick {
+    MainChaptersAdapter.OnItemMainChapterClick, TextWatcher {
 
     override fun getTheme(): Int = R.style.CustomBottomSheetDialog
 
@@ -45,6 +48,8 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
         mainChaptersAdapter = MainChaptersAdapter(requireContext(), mainChapterList, this)
         binding.rvMainChapters.adapter = mainChaptersAdapter
 
+        binding.etSearchChapter.addTextChangedListener(this)
+
         return binding.root
     }
 
@@ -52,8 +57,15 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
         Toast.makeText(requireContext(), "To chapter = $mainChapterId", Toast.LENGTH_SHORT).show()
     }
 
+    override fun afterTextChanged(s: Editable?) {}
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        mainChaptersAdapter.filter.filter(s.toString())
+    }
+
     companion object {
         const val keyMainContentChapters = "key_main_content_chapters"
     }
-
 }
