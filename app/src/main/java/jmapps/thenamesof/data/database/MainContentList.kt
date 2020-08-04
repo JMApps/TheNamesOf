@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.database.Cursor
 import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
-import jmapps.thenamesof.ui.content.model.ModelContent
 import jmapps.thenamesof.ui.main.ayahs.model.MainAyahsModel
+import jmapps.thenamesof.ui.main.bookmarks.model.MainBookmarksModel
+import jmapps.thenamesof.ui.main.chapters.model.MainChaptersModel
 import jmapps.thenamesof.ui.main.model.MainContentModel
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 
@@ -119,4 +120,80 @@ class MainContentList(private val database: SQLiteDatabase) {
         }
         return mainContents
     }
+
+    val getMainChapterList: MutableList<MainChaptersModel>
+
+        @SuppressLint("Recycle")
+        get() {
+
+            val cursor: Cursor = database.query(
+                "Table_of_chapters",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            )
+
+            val mainChapters = ArrayList<MainChaptersModel>()
+
+            try {
+                if (cursor.moveToFirst()) {
+                    while (!cursor.isAfterLast) {
+                        val chapters = MainChaptersModel(
+                            cursor.getInt(cursor.getColumnIndex("id")),
+                            cursor.getString(cursor.getColumnIndex("ChapterNumber")),
+                            cursor.getString(cursor.getColumnIndex("ChapterTitle"))
+                        )
+                        mainChapters.add(chapters)
+                        cursor.moveToNext()
+                        if (cursor.isClosed) {
+                            cursor.close()
+                        }
+                    }
+                }
+            } catch (e: SQLException) {
+
+            }
+            return mainChapters
+        }
+
+    val getMainBookmarkList: MutableList<MainBookmarksModel>
+
+        @SuppressLint("Recycle")
+        get() {
+
+            val cursor: Cursor = database.query(
+                "Table_of_chapters",
+                null,
+                "Favorite = 1",
+                null,
+                null,
+                null,
+                null
+            )
+
+            val mainBookmarks = ArrayList<MainBookmarksModel>()
+
+            try {
+                if (cursor.moveToFirst()) {
+                    while (!cursor.isAfterLast) {
+                        val bookmarks = MainBookmarksModel(
+                            cursor.getInt(cursor.getColumnIndex("id")),
+                            cursor.getString(cursor.getColumnIndex("ChapterNumber")),
+                            cursor.getString(cursor.getColumnIndex("ChapterTitle"))
+                        )
+                        mainBookmarks.add(bookmarks)
+                        cursor.moveToNext()
+                        if (cursor.isClosed) {
+                            cursor.close()
+                        }
+                    }
+                }
+            } catch (e: SQLException) {
+
+            }
+            return mainBookmarks
+        }
 }
