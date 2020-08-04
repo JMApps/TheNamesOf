@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
-import jmapps.mvp.content.ScrollReadPresenterImpl
+import jmapps.thenamesof.mvp.content.ScrollReadPresenterImpl
 import jmapps.thenamesof.R
 import jmapps.thenamesof.data.database.ContentList
 import jmapps.thenamesof.data.database.DBOpenContent

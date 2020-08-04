@@ -1,4 +1,4 @@
-package jmapps.mvp.content
+package jmapps.thenamesof.mvp.content
 
 import android.content.SharedPreferences
 
