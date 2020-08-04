@@ -42,7 +42,7 @@
                         android:textSize="18sp" />
 
                     <ToggleButton
-                        android:id="@+id/btnFavorite"
+                        android:id="@+id/tbFavoriteMainChapter"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="16dp"
@@ -52,14 +52,14 @@
                         android:textOn="" />
 
                     <Button
-                        android:id="@+id/btnCopyContent"
+                        android:id="@+id/btnCopyMainContent"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="16dp"
                         android:background="@drawable/state_copy" />
 
                     <Button
-                        android:id="@+id/btnShareContent"
+                        android:id="@+id/btnShareMainContent"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="8dp"
