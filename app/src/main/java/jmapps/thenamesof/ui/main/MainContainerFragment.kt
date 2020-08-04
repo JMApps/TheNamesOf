@@ -6,6 +6,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,12 +17,14 @@ import jmapps.thenamesof.data.database.MainContentList
 import jmapps.thenamesof.databinding.FragmentMainContainerBinding
 import jmapps.thenamesof.ui.main.ayahs.adapter.MainAyahsAdapter
 import jmapps.thenamesof.ui.main.ayahs.model.MainAyahsModel
+import jmapps.thenamesof.ui.main.bookmarks.MainContentBookmarksBottomSheet
+import jmapps.thenamesof.ui.main.chapters.MainContentChaptersBottomSheet
 import jmapps.thenamesof.ui.main.model.MainContentModel
 import jmapps.thenamesof.ui.main.names.adapter.MainNamesAdapter
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 
 class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
-    NestedScrollView.OnScrollChangeListener {
+    NestedScrollView.OnScrollChangeListener, View.OnClickListener {
 
     private var sectionNumber: Int? = 0
 
@@ -81,11 +84,14 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
 
         binding.nsMainContent.setOnScrollChangeListener(this)
 
+        binding.fabMainChapters.setOnClickListener(this)
+        binding.fabMainFavorites.setOnClickListener(this)
+
         return binding.root
     }
 
     override fun mainNameClick(mainNameId: Int) {
-
+        Toast.makeText(requireContext(), "Play", Toast.LENGTH_SHORT).show()
     }
 
     override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
@@ -95,6 +101,21 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
         } else {
             binding.fabMainChapters.show()
             binding.fabMainFavorites.show()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id) {
+
+            R.id.fabMainChapters -> {
+                val mainContentChapterBottomSheet = MainContentChaptersBottomSheet()
+                mainContentChapterBottomSheet.show(childFragmentManager, MainContentChaptersBottomSheet.keyMainContentChapters)
+            }
+
+            R.id.fabMainFavorites -> {
+                val mainContentBookmarksBottomSheet = MainContentBookmarksBottomSheet()
+                mainContentBookmarksBottomSheet.show(childFragmentManager, MainContentBookmarksBottomSheet.keyMainContentBookmarks)
+            }
         }
     }
 }

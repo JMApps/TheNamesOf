@@ -11,9 +11,9 @@ class MainChaptersHolder(chaptersView: View) : RecyclerView.ViewHolder(chaptersV
     val tvMainChapterNumber: TextView = chaptersView.findViewById(R.id.tvMainChapterNumber)
     val tvMainChapterTitle: TextView = chaptersView.findViewById(R.id.tvMainChapterTitle)
 
-    fun findMainChaptersItemClick(onItemMainNameClick: MainChaptersAdapter.OnItemMainChapterClick, mainChapterId: Int) {
+    fun findMainChaptersItemClick(onItemMainChapterClick: MainChaptersAdapter.OnItemMainChapterClick, mainChapterId: Int) {
         itemView.setOnClickListener {
-            onItemMainNameClick.itemChapterClick(mainChapterId)
+            onItemMainChapterClick.itemChapterClick(mainChapterId)
         }
     }
 }

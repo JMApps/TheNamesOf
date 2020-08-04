@@ -48,11 +48,12 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
         return binding.root
     }
 
+    override fun itemChapterClick(mainChapterId: Int) {
+        Toast.makeText(requireContext(), "To chapter = $mainChapterId", Toast.LENGTH_SHORT).show()
+    }
+
     companion object {
         const val keyMainContentChapters = "key_main_content_chapters"
     }
 
-    override fun itemChapterClick(mainChapterId: Int) {
-        Toast.makeText(requireContext(), "To chapter = $mainChapterId", Toast.LENGTH_SHORT).show()
-    }
 }
