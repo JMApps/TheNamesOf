@@ -9,6 +9,9 @@
     <string name="action_bookmark_list">Избранные главы</string>
     <string name="action_search_by_chapters">Поиск по главам…</string>
     <string name="action_bookmarks_empty">Избранных глав нет</string>
+    <string name="action_copied_to_clipboard">Скопировано в буфер</string>
+    <string name="action_added_to_bookmark">Добавлено в избранное</string>
+    <string name="action_removed_from_bookmark">Удалено из избранного</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
