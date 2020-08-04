@@ -70,12 +70,14 @@
                     android:id="@+id/rvMainNames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:overScrollMode="never" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvMainAyahs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusable="false"
                     android:overScrollMode="never" />
 
                 <androidx.cardview.widget.CardView
