@@ -214,7 +214,7 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
             myClipboard = context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
             myClip = newPlainText("", Html.fromHtml("$namesSS<br/>$ayahsSS<p/>$chapterContent<p/>$appLink"))
             myClipboard?.setPrimaryClip(myClip!!)
-            Toast.makeText(requireContext(), getString(R.string.action_copied_to_bufer), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.action_copied_to_clipboard), Toast.LENGTH_SHORT).show()
         }
     }
 }
