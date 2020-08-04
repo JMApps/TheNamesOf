@@ -11,5 +11,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        tools:listitem="@layout/item_book_content" />
+        tools:listitem="@layout/item_book_chapter" />
 </layout>

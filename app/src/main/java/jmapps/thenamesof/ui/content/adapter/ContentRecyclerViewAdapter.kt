@@ -20,7 +20,7 @@ class ContentRecyclerViewAdapter internal constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentHolder {
-        val contentView = inflater.inflate(R.layout.item_book_content, parent, false)
+        val contentView = inflater.inflate(R.layout.item_book_chapter, parent, false)
         return ContentHolder(contentView)
     }
 
