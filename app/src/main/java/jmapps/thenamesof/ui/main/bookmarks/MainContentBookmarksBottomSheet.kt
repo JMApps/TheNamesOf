@@ -1,11 +1,11 @@
 package jmapps.thenamesof.ui.main.bookmarks
 
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -27,6 +27,8 @@ class MainContentBookmarksBottomSheet : BottomSheetDialogFragment(),
 
     private lateinit var mainBookmarkList: MutableList<MainBookmarksModel>
     private lateinit var mainBookmarksAdapter: MainBookmarksAdapter
+
+    private lateinit var toCurrentItemMainContent: ToCurrentItemMainContent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +56,19 @@ class MainContentBookmarksBottomSheet : BottomSheetDialogFragment(),
     }
 
     override fun itemBookmarkClick(mainChapterId: Int) {
-        Toast.makeText(requireContext(), "To bookmark = $mainChapterId", Toast.LENGTH_SHORT).show()
+        toCurrentItemMainContent.toCurrentItemMainContent(mainChapterId)
+        dialog?.dismiss()
+    }
+
+    interface ToCurrentItemMainContent {
+        fun toCurrentItemMainContent(currentItem: Int)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ToCurrentItemMainContent) {
+            toCurrentItemMainContent = context
+        } else throw RuntimeException("$context must implement this interface")
     }
 
     companion object {

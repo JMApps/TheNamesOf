@@ -13,6 +13,6 @@ class MainContentPagerAdapter (fragmentManager: FragmentManager) :
     }
 
     override fun getCount(): Int {
-        return 66
+        return 65
     }
 }

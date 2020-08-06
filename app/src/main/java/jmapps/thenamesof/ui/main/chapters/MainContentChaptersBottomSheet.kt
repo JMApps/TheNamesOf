@@ -30,7 +30,7 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
     private lateinit var mainChapterList: MutableList<MainChaptersModel>
     private lateinit var mainChaptersAdapter: MainChaptersAdapter
 
-    private lateinit var toMainContentViewPager: ToMainContentViewPager
+    private lateinit var toCurrentItemMainContent: ToCurrentItemMainContent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,8 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
     }
 
     override fun itemChapterClick(mainChapterId: Int) {
-        toMainContentViewPager.toMainContentViewPager(mainChapterId)
+        toCurrentItemMainContent.toCurrentItemMainContent(mainChapterId)
+        dialog?.dismiss()
     }
 
     override fun afterTextChanged(s: Editable?) {}
@@ -65,14 +66,14 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
         mainChaptersAdapter.filter.filter(s.toString())
     }
 
-    interface ToMainContentViewPager {
-        fun toMainContentViewPager(currentItem: Int)
+    interface ToCurrentItemMainContent {
+        fun toCurrentItemMainContent(currentItem: Int)
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is ToMainContentViewPager) {
-            toMainContentViewPager = context
+        if (context is ToCurrentItemMainContent) {
+            toCurrentItemMainContent = context
         } else throw RuntimeException("$context must implement this interface")
     }
 

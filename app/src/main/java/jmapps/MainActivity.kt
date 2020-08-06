@@ -1,8 +1,9 @@
 package jmapps
 
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -10,22 +11,30 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityMainBinding
 import jmapps.thenamesof.ui.main.MainFragment
+import jmapps.thenamesof.ui.main.bookmarks.MainContentBookmarksBottomSheet
 import jmapps.thenamesof.ui.main.chapters.MainContentChaptersBottomSheet
 
-class MainActivity : AppCompatActivity(), MainContentChaptersBottomSheet.ToMainContentViewPager {
+class MainActivity : AppCompatActivity(), MainContentChaptersBottomSheet.ToCurrentItemMainContent,
+    MainContentBookmarksBottomSheet.ToCurrentItemMainContent {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private lateinit var preferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,
-            R.layout.activity_main
-        )
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.appBarMain.toolbar)
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        editor = preferences.edit()
 
         val navController = findNavController(R.id.main_fragment_container)
 
@@ -53,7 +62,7 @@ class MainActivity : AppCompatActivity(), MainContentChaptersBottomSheet.ToMainC
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun toMainContentViewPager(currentItem: Int) {
-        Toast.makeText(this, "yes = $currentItem", Toast.LENGTH_SHORT).show()
+    override fun toCurrentItemMainContent(currentItem: Int) {
+        editor.putInt(MainFragment.keyCurrentPosition, currentItem - 1).apply()
     }
 }
