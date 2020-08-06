@@ -12,6 +12,13 @@
     <string name="action_copied_to_clipboard">Скопировано в буфер</string>
     <string name="action_added_to_bookmark">Добавлено в избранное</string>
     <string name="action_removed_from_bookmark">Удалено из избранного</string>
+    <string name="action_main_names_text_size">Размер текста имён</string>
+    <string name="action_main_ayahs_text_size">Размер текста аятов</string>
+    <string name="action_main_content_text_size">Размер текста главы</string>
+    <string name="action_show_main_names_state">Отображение имён</string>
+    <string name="action_name_in_arabic">На арабском</string>
+    <string name="action_name_in_transcription">Транскрипция</string>
+    <string name="action_name_in_translation">На русском</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

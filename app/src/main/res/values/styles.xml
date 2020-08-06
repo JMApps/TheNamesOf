@@ -33,7 +33,6 @@
     <!--    Bottom Sheet dialog styles-->
     <style name="CustomBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CustomShapeAppearanceBottomSheetDialog</item>
-        <item name="android:colorBackground">@color/lightPrimary</item>
     </style>
 
     <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
