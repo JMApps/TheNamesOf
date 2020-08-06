@@ -3,15 +3,14 @@ package jmapps.thenamesof.ui.main
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.FragmentMainBinding
 import jmapps.thenamesof.ui.main.adapter.MainContentPagerAdapter
+import jmapps.thenamesof.ui.main.settings.MainContentSettingsBottomSheet
 
 class MainFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -30,6 +29,9 @@ class MainFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListe
         PreferenceManager.getDefaultSharedPreferences(requireContext())
             .registerOnSharedPreferenceChangeListener(this)
 
+        retainInstance = true
+        setHasOptionsMenu(true)
+
         val mainContentPagerAdapter = MainContentPagerAdapter(childFragmentManager)
         binding.mainContentViewPager.adapter = mainContentPagerAdapter
 
@@ -42,7 +44,22 @@ class MainFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListe
         return binding.root
     }
 
-    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_content, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings_main_content -> {
+                val mainContentSettingBottomSheet = MainContentSettingsBottomSheet()
+                mainContentSettingBottomSheet.show(childFragmentManager, MainContentSettingsBottomSheet.keyMainContentSettings)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSharedPreferenceChanged(preferences: SharedPreferences?, key: String?) {
         toCurrentPosition()
     }
 

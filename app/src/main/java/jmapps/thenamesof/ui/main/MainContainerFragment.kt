@@ -29,10 +29,11 @@ import jmapps.thenamesof.ui.main.chapters.MainContentChaptersBottomSheet
 import jmapps.thenamesof.ui.main.model.MainContentModel
 import jmapps.thenamesof.ui.main.names.adapter.MainNamesAdapter
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
+import jmapps.thenamesof.ui.main.settings.MainContentSettingsBottomSheet
 
 class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
     NestedScrollView.OnScrollChangeListener, View.OnClickListener,
-    CompoundButton.OnCheckedChangeListener {
+    CompoundButton.OnCheckedChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var sectionNumber: Int? = 0
 
@@ -54,6 +55,8 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
 
     private var myClipboard: ClipboardManager? = null
     private var myClip: ClipData? = null
+
+    private var contentSizeValues = (16..34).toList().filter { it % 2 == 0 }
 
     companion object {
 
@@ -87,6 +90,9 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_container, container, false)
 
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .registerOnSharedPreferenceChangeListener(this)
+
         val verticalLayoutNames  = LinearLayoutManager(context)
         binding.rvMainNames.layoutManager = verticalLayoutNames
 
@@ -113,6 +119,8 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
 
         binding.fabMainChapters.setOnClickListener(this)
         binding.fabMainFavorites.setOnClickListener(this)
+
+        contentsTextSize()
 
         return binding.root
     }
@@ -183,6 +191,10 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
         }
     }
 
+    override fun onSharedPreferenceChanged(preferences: SharedPreferences?, key: String?) {
+        contentsTextSize()
+    }
+
     private fun playName(position: Int) {
         clearPlayer()
         val resId = context?.resources?.getIdentifier(
@@ -234,5 +246,11 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
             myClipboard?.setPrimaryClip(myClip!!)
             Toast.makeText(requireContext(), getString(R.string.action_copied_to_clipboard), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun contentsTextSize() {
+        val lastContentSizeProgress = preferences.getInt(MainContentSettingsBottomSheet.keyMainContentsTextSize, 1)
+
+        binding.tvChapterContent.textSize = contentSizeValues[lastContentSizeProgress].toFloat()
     }
 }
