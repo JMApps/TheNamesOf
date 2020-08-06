@@ -5,6 +5,7 @@ import android.content.*
 import android.content.ClipData.newPlainText
 import android.content.Context.CLIPBOARD_SERVICE
 import android.database.sqlite.SQLiteDatabase
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Html
 import android.view.LayoutInflater
@@ -34,6 +35,8 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
     CompoundButton.OnCheckedChangeListener {
 
     private var sectionNumber: Int? = 0
+
+    private var mediaPlayer: MediaPlayer? = null
 
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
@@ -115,7 +118,7 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
     }
 
     override fun mainNameClick(mainNameId: Int) {
-        Toast.makeText(requireContext(), "Play", Toast.LENGTH_SHORT).show()
+        playName(mainNameId)
     }
 
 
@@ -178,6 +181,21 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
                 shareAllContent(true)
             }
         }
+    }
+
+    private fun playName(position: Int) {
+        clearPlayer()
+        val resId = context?.resources?.getIdentifier(
+            mainNameList[position].mainNameAudio, "raw", "jmapps.thenamesof")
+        mediaPlayer = MediaPlayer.create(context, resId!!)
+        mediaPlayer?.start()
+        mainNamesAdapter.onItemSelected(position)
+    }
+
+    private fun clearPlayer() {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     private fun shareAllContent(contentStateShare: Boolean) {

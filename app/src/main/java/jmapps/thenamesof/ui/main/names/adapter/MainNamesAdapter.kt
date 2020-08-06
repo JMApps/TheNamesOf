@@ -15,6 +15,8 @@ class MainNamesAdapter(
 
     val inflater: LayoutInflater = LayoutInflater.from(context)
 
+    private var currentItem: Int = -1
+
     interface OnItemMainNameClick {
         fun mainNameClick(mainNameId: Int)
     }
@@ -40,6 +42,17 @@ class MainNamesAdapter(
         holder.tvMainTranscriptionName.text = mainNameTranscription
         holder.tvMainTranslateName.text = mainNameTranslation
 
-        holder.findMainNamesItemClick(onItemMainNameClick, mainNameId)
+        holder.findMainNamesItemClick(onItemMainNameClick, position)
+
+        if (currentItem == position) {
+            holder.ivPlayName.setImageResource(R.drawable.ic_play_primary)
+        } else {
+            holder.ivPlayName.setImageResource(R.drawable.ic_play_gray)
+        }
+    }
+
+    fun onItemSelected(currentItem: Int) {
+        this.currentItem = currentItem
+        notifyDataSetChanged()
     }
 }
