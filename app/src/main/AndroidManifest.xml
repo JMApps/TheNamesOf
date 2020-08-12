@@ -24,6 +24,10 @@
             android:theme="@style/AppTheme.Main" />
         <activity
             android:name=".ui.content.activities.ContentActivity"
+            android:label="@string/action_content"
+            android:theme="@style/AppTheme.Content" />
+        <activity
+            android:name=".ui.main.MainContentActivity"
             android:label="@string/action_main_content"
             android:theme="@style/AppTheme.Content" />
     </application>

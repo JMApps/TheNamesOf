@@ -8,20 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/rounded_bottom_sheet"
-        android:minHeight="1500dp"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvDescriptionMainChapters"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_chapters"
-            android:drawablePadding="16dp"
-            android:gravity="center_vertical"
-            android:padding="16dp"
-            android:text="@string/action_chapter_list"
-            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/etSearchChapter"
@@ -29,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="@drawable/search_view_corners"
-            android:drawableStart="@drawable/ic_search"
+            android:drawableStart="@drawable/ic_search_accent"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
             android:hint="@string/action_search_by_chapters"
@@ -42,6 +29,5 @@
             android:layout_height="match_parent"
             android:scrollbarThumbVertical="@drawable/thumb_line_background"
             android:scrollbars="vertical" />
-
     </LinearLayout>
 </layout>

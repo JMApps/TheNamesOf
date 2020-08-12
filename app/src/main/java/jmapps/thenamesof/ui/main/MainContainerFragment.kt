@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.Toast
-import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
@@ -24,19 +23,15 @@ import jmapps.thenamesof.data.database.MainContentList
 import jmapps.thenamesof.databinding.FragmentMainContainerBinding
 import jmapps.thenamesof.ui.main.ayahs.adapter.MainAyahsAdapter
 import jmapps.thenamesof.ui.main.ayahs.model.MainAyahsModel
-import jmapps.thenamesof.ui.main.bookmarks.MainContentBookmarksBottomSheet
-import jmapps.thenamesof.ui.main.chapters.MainContentChaptersBottomSheet
 import jmapps.thenamesof.ui.main.model.MainContentModel
 import jmapps.thenamesof.ui.main.names.adapter.MainNamesAdapter
 import jmapps.thenamesof.ui.main.names.model.MainNamesModel
 import jmapps.thenamesof.ui.main.settings.MainContentSettingsBottomSheet
 
-class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
-    NestedScrollView.OnScrollChangeListener, View.OnClickListener,
+class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick, View.OnClickListener,
     CompoundButton.OnCheckedChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var sectionNumber: Int? = 0
-
     private var mediaPlayer: MediaPlayer? = null
 
     private lateinit var preferences: SharedPreferences
@@ -115,11 +110,6 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
         binding.btnCopyMainContent.setOnClickListener(this)
         binding.btnShareMainContent.setOnClickListener(this)
 
-        binding.nsMainContent.setOnScrollChangeListener(this)
-
-        binding.fabMainChapters.setOnClickListener(this)
-        binding.fabMainFavorites.setOnClickListener(this)
-
         contentsTextSize()
 
         return binding.root
@@ -135,8 +125,6 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
             R.id.tbFavoriteMainChapter -> {
                 val favorite = ContentValues()
                 favorite.put("Favorite", isChecked)
-
-                editor.putBoolean("key_main_favorite_$sectionNumber", isChecked).apply()
 
                 try {
                     database.update(
@@ -154,32 +142,13 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick,
                 } else {
                     Toast.makeText(requireContext(), getString(R.string.action_removed_from_bookmark), Toast.LENGTH_SHORT).show()
                 }
+                editor.putBoolean("key_main_favorite_$sectionNumber", isChecked).apply()
             }
-        }
-    }
-
-    override fun onScrollChange(v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int) {
-        if (oldScrollY < scrollY) {
-            binding.fabMainChapters.hide()
-            binding.fabMainFavorites.hide()
-        } else {
-            binding.fabMainChapters.show()
-            binding.fabMainFavorites.show()
         }
     }
 
     override fun onClick(v: View?) {
         when(v?.id) {
-
-            R.id.fabMainChapters -> {
-                val mainContentChapterBottomSheet = MainContentChaptersBottomSheet()
-                mainContentChapterBottomSheet.show(childFragmentManager, MainContentChaptersBottomSheet.keyMainContentChapters)
-            }
-
-            R.id.fabMainFavorites -> {
-                val mainContentBookmarksBottomSheet = MainContentBookmarksBottomSheet()
-                mainContentBookmarksBottomSheet.show(childFragmentManager, MainContentBookmarksBottomSheet.keyMainContentBookmarks)
-            }
 
             R.id.btnCopyMainContent -> {
                 shareAllContent(false)

@@ -1,6 +1,6 @@
 package jmapps.thenamesof.ui.main.chapters
 
-import android.content.Context
+import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.text.Editable
@@ -9,28 +9,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import jmapps.thenamesof.R
 import jmapps.thenamesof.data.database.DBOpenMainContent
 import jmapps.thenamesof.data.database.MainContentList
-import jmapps.thenamesof.databinding.BottomSheetMainContentChaptersBinding
+import jmapps.thenamesof.databinding.FragmentMainContentChaptersBinding
+import jmapps.thenamesof.ui.main.MainContentActivity
 import jmapps.thenamesof.ui.main.chapters.adapter.MainChaptersAdapter
 import jmapps.thenamesof.ui.main.chapters.model.MainChaptersModel
 
-class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
+class MainContentChaptersFragment : Fragment(),
     MainChaptersAdapter.OnItemMainChapterClick, TextWatcher {
 
-    override fun getTheme(): Int = R.style.CustomBottomSheetDialog
-
-    private lateinit var binding: BottomSheetMainContentChaptersBinding
-
+    private lateinit var binding: FragmentMainContentChaptersBinding
     private lateinit var database: SQLiteDatabase
 
     private lateinit var mainChapterList: MutableList<MainChaptersModel>
     private lateinit var mainChaptersAdapter: MainChaptersAdapter
-
-    private lateinit var toCurrentItemMainContent: ToCurrentItemMainContent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +36,7 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet_main_content_chapters, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_content_chapters, container, false)
 
         val verticalLayoutNames  = LinearLayoutManager(context)
         binding.rvMainChapters.layoutManager = verticalLayoutNames
@@ -54,8 +50,9 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
     }
 
     override fun itemChapterClick(mainChapterId: Int) {
-        toCurrentItemMainContent.toCurrentItemMainContent(mainChapterId)
-        dialog?.dismiss()
+        val toMainContentActivity = Intent(requireContext(), MainContentActivity::class.java)
+        toMainContentActivity.putExtra(MainContentActivity.keyMainChapterId, mainChapterId)
+        startActivity(toMainContentActivity)
     }
 
     override fun afterTextChanged(s: Editable?) {}
@@ -64,20 +61,5 @@ class MainContentChaptersBottomSheet : BottomSheetDialogFragment(),
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         mainChaptersAdapter.filter.filter(s.toString())
-    }
-
-    interface ToCurrentItemMainContent {
-        fun toCurrentItemMainContent(currentItem: Int)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is ToCurrentItemMainContent) {
-            toCurrentItemMainContent = context
-        } else throw RuntimeException("$context must implement this interface")
-    }
-
-    companion object {
-        const val keyMainContentChapters = "key_main_content_chapters"
     }
 }

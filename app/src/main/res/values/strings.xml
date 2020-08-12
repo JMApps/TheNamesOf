@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Имена Аллаха</string>
-    <string name="action_main_content">Основной материал</string>
+    <string name="action_content">Основной материал</string>
+    <string name="action_main_content">Толкование имён</string>
 
     <!--    Main-->
     <string name="action_night_mode">Ночной режим</string>
