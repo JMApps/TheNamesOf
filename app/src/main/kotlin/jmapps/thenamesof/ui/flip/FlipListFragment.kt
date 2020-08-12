@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.FragmentFlipBinding
 
-class FlipFragment : Fragment() {
+class FlipListFragment : Fragment() {
 
     private lateinit var binding: FragmentFlipBinding
 

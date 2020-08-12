@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/nav_name_flip_card"
-        android:name="jmapps.thenamesof.ui.flip.FlipFragment"
+        android:name="jmapps.thenamesof.ui.flip.FlipListFragment"
         tools:layout="@layout/fragment_flip" />
 
     <fragment
