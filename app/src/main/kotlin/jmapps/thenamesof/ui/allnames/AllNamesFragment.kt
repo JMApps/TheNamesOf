@@ -1,6 +1,8 @@
 package jmapps.thenamesof.ui.allnames
 
+import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -13,13 +15,16 @@ import jmapps.thenamesof.databinding.FragmentAllNamesBinding
 import jmapps.thenamesof.ui.allnames.adapter.AllNamesAdapter
 import jmapps.thenamesof.ui.allnames.model.AllNamesModel
 
-class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick {
+class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick,
+    AllNamesAdapter.ShareAllNamesItemClick {
 
     private lateinit var binding: FragmentAllNamesBinding
     private lateinit var database: SQLiteDatabase
 
     private lateinit var allNamesList: MutableList<AllNamesModel>
     private lateinit var allNamesAdapter: AllNamesAdapter
+
+    private var mediaPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +42,7 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick {
         val verticalLayout = LinearLayoutManager(requireContext())
         binding.rvAllNames.layoutManager = verticalLayout
 
-        allNamesAdapter = AllNamesAdapter(requireContext(), allNamesList, this)
+        allNamesAdapter = AllNamesAdapter(requireContext(), allNamesList, this, this)
         binding.rvAllNames.adapter = allNamesAdapter
 
         return binding.root
@@ -59,6 +64,34 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick {
     }
 
     override fun allNameItemClick(position: Int) {
+        playName(position)
+    }
 
+    override fun shareAllNamesItemClick(position: Int) {
+        shareNames(position)
+    }
+
+    private fun playName(position: Int) {
+        clearPlayer()
+        val resId = context?.resources?.getIdentifier(
+            allNamesList[position].allNameAudio, "raw", "jmapps.thenamesof")
+        mediaPlayer = MediaPlayer.create(context, resId!!)
+        mediaPlayer?.start()
+        allNamesAdapter.onItemSelected(position)
+    }
+
+    private fun clearPlayer() {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+    private fun shareNames(position: Int) {
+        val current = allNamesList[position]
+        val names = "${current.allNameArabic}\n${current.allNameTranscription}\n${current.allNameTranslation}"
+        val shareNames = Intent(Intent.ACTION_SEND)
+        shareNames.type = "text/plain"
+        shareNames.putExtra(Intent.EXTRA_TEXT, names)
+        context?.startActivity(shareNames)
     }
 }

@@ -11,12 +11,18 @@ import jmapps.thenamesof.ui.allnames.model.AllNamesModel
 class AllNamesAdapter(
     context: Context,
     private val allNamesList: MutableList<AllNamesModel>,
-    private val allNameItemClick: AllNameItemClick) : RecyclerView.Adapter<AllNamesHolder>() {
+    private val allNameItemClick: AllNameItemClick,
+    private val shareAllNamesItemClick: ShareAllNamesItemClick) : RecyclerView.Adapter<AllNamesHolder>() {
 
+    private var currentItem: Int = -1
     val inflater: LayoutInflater = LayoutInflater.from(context)
 
     interface AllNameItemClick {
         fun allNameItemClick(position: Int)
+    }
+
+    interface ShareAllNamesItemClick {
+        fun shareAllNamesItemClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllNamesHolder {
@@ -36,5 +42,17 @@ class AllNamesAdapter(
         holder.tvAllTranslationName.text = current.allNameTranslation
 
         holder.findAllNameItemClick(allNameItemClick, position)
+        holder.findShareAllNamesItemClick(shareAllNamesItemClick, position)
+
+        if (currentItem == position) {
+            holder.ivPlayAllName.setImageResource(R.drawable.ic_play_primary)
+        } else {
+            holder.ivPlayAllName.setImageResource(R.drawable.ic_play_gray)
+        }
+    }
+
+    fun onItemSelected(currentItem: Int) {
+        this.currentItem = currentItem
+        notifyDataSetChanged()
     }
 }

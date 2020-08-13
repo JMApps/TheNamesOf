@@ -23,7 +23,7 @@ class AllNamesHolder(allNameView: View) : RecyclerView.ViewHolder(allNameView),
     val tvAllTranslationName: TextView = allNameView.findViewById(R.id.tvAllTranslationName)
 
     val ivPlayAllName: ImageView = allNameView.findViewById(R.id.ivPlayAllName)
-    val btnShareNames: Button = allNameView.findViewById(R.id.btnShareNames)
+    private val btnShareNames: Button = allNameView.findViewById(R.id.btnShareNames)
 
     init {
         PreferenceManager.getDefaultSharedPreferences(itemView.context)
@@ -34,6 +34,12 @@ class AllNamesHolder(allNameView: View) : RecyclerView.ViewHolder(allNameView),
     fun findAllNameItemClick(allNameItemClick: AllNamesAdapter.AllNameItemClick, position: Int) {
         itemView.setOnClickListener {
             allNameItemClick.allNameItemClick(position)
+        }
+    }
+
+    fun findShareAllNamesItemClick(shareAllNamesItemClick: AllNamesAdapter.ShareAllNamesItemClick, position: Int) {
+        btnShareNames.setOnClickListener {
+            shareAllNamesItemClick.shareAllNamesItemClick(position)
         }
     }
 
