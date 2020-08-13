@@ -14,7 +14,6 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityMainBinding
-import jmapps.thenamesof.ui.main.bookmarks.MainContentBookmarksBottomSheet
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +38,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.nav_book_content,
                 R.id.nav_names_content,
+                R.id.nav_all_names,
                 R.id.nav_name_flip_card,
                 R.id.nav_name_input_card,
                 R.id.nav_quiz
