@@ -22,11 +22,11 @@ class FlipListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlipListHolder {
         return if (cardState) {
-            val cardArabic = inflater.inflate(R.layout.flip_state_one, parent, false)
-            FlipListHolder(cardArabic)
-        } else {
             val cardTranslation = inflater.inflate(R.layout.flip_state_two, parent, false)
             FlipListHolder(cardTranslation)
+        } else {
+            val cardArabic = inflater.inflate(R.layout.flip_state_one, parent, false)
+            FlipListHolder(cardArabic)
         }
     }
 
