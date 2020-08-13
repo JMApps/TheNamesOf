@@ -23,7 +23,7 @@ class MainContentBookmarksBottomSheet : BottomSheetDialogFragment(),
 
     private lateinit var binding: BottomSheetMainContentBookmarksBinding
 
-    private lateinit var database: SQLiteDatabase
+    private var database: SQLiteDatabase? = null
 
     private lateinit var mainBookmarkList: MutableList<MainBookmarksModel>
     private lateinit var mainBookmarksAdapter: MainBookmarksAdapter
@@ -34,7 +34,7 @@ class MainContentBookmarksBottomSheet : BottomSheetDialogFragment(),
         super.onCreate(savedInstanceState)
 
         database = DBOpenMainContent(context).readableDatabase
-        mainBookmarkList = MainContentList(database).getMainBookmarkList
+        mainBookmarkList = MainContentList(database!!).getMainBookmarkList
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,6 +69,11 @@ class MainContentBookmarksBottomSheet : BottomSheetDialogFragment(),
         if (context is ToCurrentItemMainContent) {
             toCurrentItemMainContent = context
         } else throw RuntimeException("$context must implement this interface")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        database?.close()
     }
 
     companion object {

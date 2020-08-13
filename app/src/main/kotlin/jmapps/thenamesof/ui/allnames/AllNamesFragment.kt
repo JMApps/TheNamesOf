@@ -19,7 +19,7 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick,
     AllNamesAdapter.ShareAllNamesItemClick {
 
     private lateinit var binding: FragmentAllNamesBinding
-    private lateinit var database: SQLiteDatabase
+    private var database: SQLiteDatabase? = null
 
     private lateinit var allNamesList: MutableList<AllNamesModel>
     private lateinit var allNamesAdapter: AllNamesAdapter
@@ -30,7 +30,7 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick,
         super.onCreate(savedInstanceState)
 
         database = DBOpenAllNames(requireContext()).readableDatabase
-        allNamesList = AllNamesContent(database).getAllNamesList
+        allNamesList = AllNamesContent(database!!).getAllNamesList
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -69,6 +69,11 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick,
 
     override fun shareAllNamesItemClick(position: Int) {
         shareNames(position)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        database?.close()
     }
 
     private fun playName(position: Int) {

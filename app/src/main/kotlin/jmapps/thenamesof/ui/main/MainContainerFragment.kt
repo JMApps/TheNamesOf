@@ -38,7 +38,7 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick, 
     private lateinit var editor: SharedPreferences.Editor
 
     private lateinit var binding: FragmentMainContainerBinding
-    private lateinit var database: SQLiteDatabase
+    private var database: SQLiteDatabase? = null
 
     private lateinit var mainNameList: MutableList<MainNamesModel>
     private lateinit var mainNamesAdapter: MainNamesAdapter
@@ -77,9 +77,9 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick, 
         editor = preferences.edit()
 
         database = DBOpenMainContent(context).readableDatabase
-        mainNameList = MainContentList(database).getMainNamesList(sectionNumber)
-        mainAyahList = MainContentList(database).getMainAyahsList(sectionNumber)
-        mainContentList = MainContentList(database).getMainContentList
+        mainNameList = MainContentList(database!!).getMainNamesList(sectionNumber)
+        mainAyahList = MainContentList(database!!).getMainAyahsList(sectionNumber)
+        mainContentList = MainContentList(database!!).getMainContentList
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -127,7 +127,7 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick, 
                 favorite.put("Favorite", isChecked)
 
                 try {
-                    database.update(
+                    database?.update(
                         "Table_of_chapters",
                         favorite,
                         "id = ?",
@@ -162,6 +162,11 @@ class MainContainerFragment : Fragment(), MainNamesAdapter.OnItemMainNameClick, 
 
     override fun onSharedPreferenceChanged(preferences: SharedPreferences?, key: String?) {
         contentsTextSize()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        database?.close()
     }
 
     private fun playName(position: Int) {

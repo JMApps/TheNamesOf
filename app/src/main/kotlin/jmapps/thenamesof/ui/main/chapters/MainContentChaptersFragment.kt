@@ -23,7 +23,7 @@ class MainContentChaptersFragment : Fragment(),
     MainChaptersAdapter.OnItemMainChapterClick, TextWatcher {
 
     private lateinit var binding: FragmentMainContentChaptersBinding
-    private lateinit var database: SQLiteDatabase
+    private var database: SQLiteDatabase? = null
 
     private lateinit var mainChapterList: MutableList<MainChaptersModel>
     private lateinit var mainChaptersAdapter: MainChaptersAdapter
@@ -32,7 +32,7 @@ class MainContentChaptersFragment : Fragment(),
         super.onCreate(savedInstanceState)
 
         database = DBOpenMainContent(context).readableDatabase
-        mainChapterList = MainContentList(database).getMainChapterList
+        mainChapterList = MainContentList(database!!).getMainChapterList
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,5 +61,10 @@ class MainContentChaptersFragment : Fragment(),
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
         mainChaptersAdapter.filter.filter(s.toString())
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        database?.close()
     }
 }

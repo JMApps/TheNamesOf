@@ -17,7 +17,7 @@ import jmapps.thenamesof.ui.flip.model.FlipListModel
 class FlipListFragment : Fragment(), FlipListAdapter.FlipCardItemClick {
 
     private lateinit var binding: FragmentFlipBinding
-    private lateinit var database: SQLiteDatabase
+    private var database: SQLiteDatabase? = null
 
     private lateinit var flipNameList: MutableList<FlipListModel>
     private lateinit var flipNameAdapter: FlipListAdapter
@@ -28,7 +28,7 @@ class FlipListFragment : Fragment(), FlipListAdapter.FlipCardItemClick {
         super.onCreate(savedInstanceState)
 
         database = DBOpenAllNames(requireContext()).readableDatabase
-        flipNameList = AllNamesContent(database).getFlipNamesList
+        flipNameList = AllNamesContent(database!!).getFlipNamesList
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -67,6 +67,11 @@ class FlipListFragment : Fragment(), FlipListAdapter.FlipCardItemClick {
         if (binding.tbFlipAudioState.isChecked) {
             playName(position)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        database?.close()
     }
 
     private fun initFlipCardList(cardState: Boolean) {

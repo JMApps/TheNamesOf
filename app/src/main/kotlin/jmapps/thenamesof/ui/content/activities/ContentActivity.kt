@@ -18,7 +18,7 @@ import jmapps.thenamesof.ui.content.model.ModelContent
 class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private lateinit var binding: ActivityContentBinding
-    private lateinit var database: SQLiteDatabase
+    private var database: SQLiteDatabase? = null
     private lateinit var contentList: MutableList<ModelContent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         val getContentId = intent.getIntExtra(keyContentId, 1)
 
         database = DBOpenContent(this).readableDatabase
-        contentList = ContentList(database).getContentList
+        contentList = ContentList(database!!).getContentList
 
         val contentPagerAdapter = ContentPagerAdapter(supportFragmentManager)
         binding.contentViewPager.adapter = contentPagerAdapter
@@ -68,6 +68,11 @@ class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     override fun onPageSelected(position: Int) {
         binding.tvContentTitle.text = contentList[position].contentTitle
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        database?.close()
     }
 
     companion object {
