@@ -3,9 +3,7 @@ package jmapps.thenamesof.ui.flip
 import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +34,9 @@ class FlipListFragment : Fragment(), FlipListAdapter.FlipCardItemClick {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_flip, container, false)
 
+        retainInstance = true
+        setHasOptionsMenu(true)
+
         val verticalLayout = LinearLayoutManager(requireContext())
         binding.rvFlipListNames.layoutManager = verticalLayout
 
@@ -45,6 +46,21 @@ class FlipListFragment : Fragment(), FlipListAdapter.FlipCardItemClick {
         }
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_flip_names, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings_main_flip_names -> {
+                val settingsFlipListBottomSheet = SettingsFlipListBottomSheet()
+                settingsFlipListBottomSheet.show(childFragmentManager, SettingsFlipListBottomSheet.keyFlipNamesSettings)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun flipItemClick(position: Int) {
