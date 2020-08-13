@@ -49,6 +49,7 @@ class FlipListFragment : Fragment(), FlipListAdapter.FlipCardItemClick {
     }
 
     private fun initFlipCardList(cardState: Boolean) {
+        flipNameList.shuffle()
         flipNameAdapter = FlipListAdapter(requireContext(), cardState, flipNameList, this)
         binding.rvFlipListNames.adapter = flipNameAdapter
     }
