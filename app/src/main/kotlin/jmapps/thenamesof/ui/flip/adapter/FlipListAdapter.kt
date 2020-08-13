@@ -17,7 +17,7 @@ class FlipListAdapter(
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     interface FlipCardItemClick {
-        fun flipItemClick(flipNameId: Int)
+        fun flipItemClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlipListHolder {
@@ -42,6 +42,6 @@ class FlipListAdapter(
         holder.tvFlipTranslationNameNumber.text = current.flipNameId.toString()
         holder.tvFlipTranslationName.text = current.flipNameTranslation
 
-        holder.findFlipItemClick(flipCardItemClick, current.flipNameId)
+        holder.findFlipItemClick(flipCardItemClick, position)
     }
 }

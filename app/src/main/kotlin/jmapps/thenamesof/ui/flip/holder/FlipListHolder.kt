@@ -16,10 +16,10 @@ class FlipListHolder(flipView: View) : RecyclerView.ViewHolder(flipView) {
     val tvFlipTranslationName: TextView = flipView.findViewById(R.id.tvFlipTranslationName)
     val tvFlipTranslationNameNumber: TextView = flipView.findViewById(R.id.tvFlipTranslationNameNumber)
 
-    fun findFlipItemClick(flipCardItemClick: FlipListAdapter.FlipCardItemClick, flipNameId: Int) {
+    fun findFlipItemClick(flipCardItemClick: FlipListAdapter.FlipCardItemClick, position: Int) {
         itemView.setOnClickListener {
             flViewNames.flipTheView()
-            flipCardItemClick.flipItemClick(flipNameId)
+            flipCardItemClick.flipItemClick(position)
         }
     }
 }
