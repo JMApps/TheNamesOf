@@ -5,35 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    app:cardCornerRadius="25dp"
     app:cardElevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/edging_flip_one_card"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <ImageView
-            android:id="@+id/ivPlayFlipName"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="16dp" />
+        android:minHeight="120dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tvTextArFlip"
+            android:id="@+id/tvFlipArabicName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="16dp"
             android:layout_weight="1"
-            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="28sp"
             tools:text="Первый" />
 
         <TextView
-            android:id="@+id/tvNameNumberFlip"
+            android:id="@+id/tvFlipArabicNameNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/circle_arabic_name_number"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             tools:text="1" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
