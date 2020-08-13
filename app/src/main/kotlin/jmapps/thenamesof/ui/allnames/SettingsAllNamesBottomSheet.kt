@@ -31,7 +31,7 @@ class SettingsAllNamesBottomSheet : BottomSheetDialogFragment(), SeekBar.OnSeekB
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         editor = preferences.edit()
 
-        val lastTextSizeValue = preferences.getInt(keyAllNamesTextSize, 0)
+        val lastTextSizeValue = preferences.getInt(keyAllNamesTextSize, 1)
         binding.sbAllNameTextSize.progress = lastTextSizeValue
         binding.tvAllNameTextSizeCount.text = textSizeValues[lastTextSizeValue].toString()
 

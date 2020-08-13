@@ -43,7 +43,7 @@ class AllNamesHolder(allNameView: View) : RecyclerView.ViewHolder(allNameView),
         }
     }
 
-    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
+    override fun onSharedPreferenceChanged(prefrences: SharedPreferences?, key: String?) {
         namesTextSize()
     }
 
