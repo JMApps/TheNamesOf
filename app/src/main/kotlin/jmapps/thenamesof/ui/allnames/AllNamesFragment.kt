@@ -2,9 +2,7 @@ package jmapps.thenamesof.ui.allnames
 
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +31,9 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_all_names, container, false)
 
+        retainInstance = true
+        setHasOptionsMenu(true)
+
         val verticalLayout = LinearLayoutManager(requireContext())
         binding.rvAllNames.layoutManager = verticalLayout
 
@@ -40,6 +41,21 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick {
         binding.rvAllNames.adapter = allNamesAdapter
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_all_names, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings_main_all_names -> {
+                val settingsAllNamesBottomSheet = SettingsAllNamesBottomSheet()
+                settingsAllNamesBottomSheet.show(childFragmentManager, SettingsAllNamesBottomSheet.keyAllNamesSettings)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun allNameItemClick(position: Int) {
