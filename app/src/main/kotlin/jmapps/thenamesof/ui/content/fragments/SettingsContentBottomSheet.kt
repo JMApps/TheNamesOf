@@ -31,7 +31,7 @@ class SettingsContentBottomSheet : BottomSheetDialogFragment(), SeekBar.OnSeekBa
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         editor = preferences.edit()
 
-        val lastTextSizeValue = preferences.getInt(keyContentTextSize, 0)
+        val lastTextSizeValue = preferences.getInt(keyContentTextSize, 1)
         binding.sbContentTextSize.progress = lastTextSizeValue
         binding.tvContentTextSizeCount.text = textSizeValues[lastTextSizeValue].toString()
 

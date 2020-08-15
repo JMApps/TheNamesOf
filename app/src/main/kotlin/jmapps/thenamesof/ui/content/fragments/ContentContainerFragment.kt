@@ -11,11 +11,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
-import jmapps.thenamesof.mvp.content.ScrollReadPresenterImpl
 import jmapps.thenamesof.R
 import jmapps.thenamesof.data.database.ContentList
 import jmapps.thenamesof.data.database.DBOpenContent
 import jmapps.thenamesof.databinding.FragmentContentContainerBinding
+import jmapps.thenamesof.mvp.content.ScrollReadPresenterImpl
 import jmapps.thenamesof.ui.content.model.ModelContent
 
 class ContentContainerFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -67,12 +67,12 @@ class ContentContainerFragment : Fragment(), SharedPreferences.OnSharedPreferenc
         return binding.root
     }
 
-    override fun onSharedPreferenceChanged(p0: SharedPreferences?, p1: String?) {
+    override fun onSharedPreferenceChanged(preferences: SharedPreferences?, key: String?) {
         getContentTextSize()
     }
 
     private fun getContentTextSize() {
-        val lastContentTextSize = preferences.getInt(SettingsContentBottomSheet.keyContentTextSize, 0)
+        val lastContentTextSize = preferences.getInt(SettingsContentBottomSheet.keyContentTextSize, 1)
         binding.tvContentText.textSize = textSizeValues[lastContentTextSize].toFloat()
     }
 

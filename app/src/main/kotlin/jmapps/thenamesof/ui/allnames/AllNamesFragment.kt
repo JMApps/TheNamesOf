@@ -42,6 +42,7 @@ class AllNamesFragment : Fragment(), AllNamesAdapter.AllNameItemClick,
         val verticalLayout = LinearLayoutManager(requireContext())
         binding.rvAllNames.layoutManager = verticalLayout
 
+        allNamesList.shuffle()
         allNamesAdapter = AllNamesAdapter(requireContext(), allNamesList, this, this)
         binding.rvAllNames.adapter = allNamesAdapter
 
