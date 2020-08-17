@@ -79,5 +79,4 @@ class MainContentBookmarksBottomSheet : BottomSheetDialogFragment(),
     companion object {
         const val keyMainContentBookmarks = "key_main_content_bookmarks"
     }
-
 }
