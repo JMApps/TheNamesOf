@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/nav_name_input_card"
-        android:name="jmapps.thenamesof.ui.input.InputFragment"
+        android:name="jmapps.thenamesof.ui.input.fragments.InputFragment"
         tools:layout="@layout/fragment_input" />
 
     <fragment

@@ -1,4 +1,4 @@
-package jmapps.thenamesof.ui.input
+package jmapps.thenamesof.ui.input.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

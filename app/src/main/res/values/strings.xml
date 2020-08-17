@@ -20,6 +20,10 @@
     <string name="action_name_in_arabic">На арабском</string>
     <string name="action_name_in_transcription">Транскрипция</string>
     <string name="action_name_in_translation">На русском</string>
+    <string name="action_input_categories">Выберите категорию ввода…</string>
+    <string name="action_arabic">Арабский</string>
+    <string name="action_russian">Русский</string>
+    <string name="action_input_type">Режим ввода</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

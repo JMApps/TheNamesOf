@@ -30,6 +30,11 @@
             android:name=".ui.main.MainContentActivity"
             android:label="@string/action_main_content"
             android:theme="@style/AppTheme.Content" />
+
+        <activity
+            android:name=".ui.input.activities.InputActivity"
+            android:label="@string/action_input_type"
+            android:theme="@style/AppTheme.Content" />
     </application>
 
 </manifest>
