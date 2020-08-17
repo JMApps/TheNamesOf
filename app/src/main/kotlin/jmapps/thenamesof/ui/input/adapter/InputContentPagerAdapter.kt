@@ -13,6 +13,6 @@ class InputContentPagerAdapter(activity: AppCompatActivity) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        return InputContainerFragment.newInstance(position)
+        return InputContainerFragment.newInstance(position + 1)
     }
 }

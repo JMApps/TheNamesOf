@@ -9,8 +9,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityInputBinding
 import jmapps.thenamesof.ui.input.adapter.InputContentPagerAdapter
+import jmapps.thenamesof.ui.input.fragments.InputContainerFragment
 
-class InputActivity : AppCompatActivity() {
+class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPosition {
 
     private lateinit var binding: ActivityInputBinding
 
@@ -44,5 +45,9 @@ class InputActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun nextPagerPosition(position: Int) {
+
     }
 }
