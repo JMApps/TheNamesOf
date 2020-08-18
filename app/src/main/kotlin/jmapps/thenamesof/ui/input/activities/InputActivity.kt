@@ -24,7 +24,7 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
 
         val inputContentPagerAdapter = InputContentPagerAdapter(this)
         binding.inputContentViewPager.adapter = inputContentPagerAdapter
-        binding.inputContentViewPager.isUserInputEnabled = false
+//        binding.inputContentViewPager.isUserInputEnabled = false
         TabLayoutMediator(binding.inputContentTabLayout, binding.inputContentViewPager) { tab, position ->
             tab.view.isClickable = false;
             tab.text = (position + 1).toString()

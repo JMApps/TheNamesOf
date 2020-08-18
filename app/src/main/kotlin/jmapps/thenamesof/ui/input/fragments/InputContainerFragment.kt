@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import jmapps.thenamesof.R
@@ -16,7 +17,7 @@ import jmapps.thenamesof.data.database.DBOpenAllNames
 import jmapps.thenamesof.databinding.FragmentInputContainerBinding
 import jmapps.thenamesof.ui.flip.model.FlipListModel
 
-class InputContainerFragment : Fragment(), TextWatcher {
+class InputContainerFragment : Fragment(), TextWatcher, View.OnClickListener {
 
     private lateinit var binding: FragmentInputContainerBinding
     private var database: SQLiteDatabase? = null
@@ -52,10 +53,10 @@ class InputContainerFragment : Fragment(), TextWatcher {
         sectionNumber = arguments?.getInt(ARG_CONTENT_NUMBER)
         toNextPagerPosition.nextPagerPosition(sectionNumber!!)
 
-        binding.tvInputName.text = flipNameList[sectionNumber!!].flipNameArabic
-        binding.tvWriteInputNameState.text = flipNameList[sectionNumber!!].flipNameTranslation
+        binding.tvInputName.text = flipNameList[sectionNumber!! - 1].flipNameArabic
 
         binding.etInputName.addTextChangedListener(this)
+        binding.ibtnToNextInputName.setOnClickListener(this)
 
         return binding.root
     }
@@ -67,7 +68,16 @@ class InputContainerFragment : Fragment(), TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        binding.tvWriteInputNameState.text = "$s"
+
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+
+            R.id.ibtnToNextInputName -> {
+                toNextInputName()
+            }
+        }
     }
 
     interface ToNextPagerPosition {
@@ -84,5 +94,28 @@ class InputContainerFragment : Fragment(), TextWatcher {
     override fun onDestroyView() {
         super.onDestroyView()
         database?.close()
+    }
+
+    private fun toNextInputName() {
+        binding.tvWriteInputNameState.text = binding.etInputName.text
+        closeKeyboard()
+        checkInput()
+        binding.etInputName.text.clear()
+    }
+
+    private fun closeKeyboard() {
+        val keyboard: InputMethodManager =
+            (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?)!!
+        keyboard.hideSoftInputFromWindow(binding.etInputName.windowToken, 0)
+    }
+
+    private fun checkInput() {
+        if (binding.etInputName.text.toString() == flipNameList[sectionNumber!! - 1].flipNameTranslation) {
+            binding.tvCheckInputTrue.visibility = View.VISIBLE
+            binding.tvCheckInputFalse.visibility = View.GONE
+        } else {
+            binding.tvCheckInputFalse.visibility = View.VISIBLE
+            binding.tvCheckInputTrue.visibility = View.GONE
+        }
     }
 }
