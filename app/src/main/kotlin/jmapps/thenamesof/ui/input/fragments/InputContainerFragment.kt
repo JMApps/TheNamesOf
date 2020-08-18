@@ -2,6 +2,7 @@ package jmapps.thenamesof.ui.input.fragments
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,6 +24,7 @@ class InputContainerFragment : Fragment(), TextWatcher, View.OnClickListener {
     private var database: SQLiteDatabase? = null
 
     private var sectionNumber: Int? = 0
+    private var mediaPlayer: MediaPlayer? = null
 
     private lateinit var flipNameList: MutableList<FlipListModel>
     private lateinit var toNextPagerPosition: ToNextPagerPosition
@@ -56,6 +58,7 @@ class InputContainerFragment : Fragment(), TextWatcher, View.OnClickListener {
         binding.tvInputName.text = flipNameList[sectionNumber!! - 1].flipNameArabic
 
         binding.etInputName.addTextChangedListener(this)
+        binding.ibtnPlayInputName.setOnClickListener(this)
         binding.ibtnToNextInputName.setOnClickListener(this)
 
         return binding.root
@@ -73,6 +76,10 @@ class InputContainerFragment : Fragment(), TextWatcher, View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+
+            R.id.ibtnPlayInputName -> {
+                playName()
+            }
 
             R.id.ibtnToNextInputName -> {
                 toNextInputName()
@@ -94,6 +101,20 @@ class InputContainerFragment : Fragment(), TextWatcher, View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         database?.close()
+    }
+
+    private fun playName() {
+        clearPlayer()
+        val resId = context?.resources?.getIdentifier(
+            flipNameList[sectionNumber!! - 1].flipNameAudio, "raw", "jmapps.thenamesof")
+        mediaPlayer = MediaPlayer.create(context, resId!!)
+        mediaPlayer?.start()
+    }
+
+    private fun clearPlayer() {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
     }
 
     private fun toNextInputName() {
