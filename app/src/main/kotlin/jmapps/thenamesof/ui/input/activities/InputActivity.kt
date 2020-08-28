@@ -1,10 +1,13 @@
 package jmapps.thenamesof.ui.input.activities
 
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.preference.PreferenceManager
 import com.google.android.material.tabs.TabLayoutMediator
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityInputBinding
@@ -15,6 +18,10 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
 
     private lateinit var binding: ActivityInputBinding
 
+    private lateinit var preferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_input)
@@ -22,13 +29,18 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        editor = preferences.edit()
+
         val inputContentPagerAdapter = InputContentPagerAdapter(this)
         binding.inputContentViewPager.adapter = inputContentPagerAdapter
-//        binding.inputContentViewPager.isUserInputEnabled = false
+        binding.inputContentViewPager.isUserInputEnabled = false
         TabLayoutMediator(binding.inputContentTabLayout, binding.inputContentViewPager) { tab, position ->
-            tab.view.isClickable = false;
+            tab.view.isClickable = false
             tab.text = (position + 1).toString()
         }.attach()
+
+        loadLastPagerPosition()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,6 +60,11 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
     }
 
     override fun nextPagerPosition(position: Int) {
+        binding.inputContentViewPager.currentItem = position
+    }
 
+    private fun loadLastPagerPosition() {
+        val lastPosition = preferences.getInt(InputContainerFragment.keyLastInputData, 0)
+        binding.inputContentViewPager.setCurrentItem(lastPosition, false)
     }
 }
