@@ -25,8 +25,11 @@
     <string name="action_russian">Русский</string>
     <string name="action_input_type">Режим ввода</string>
     <string name="action_input_name">Введите имя перевод…</string>
-    <string name="action_true">Вы ошиблись!</string>
+    <string name="action_add_text">Введите текст…</string>
     <string name="action_false">Правильно!</string>
+    <string name="action_true">Вы ошиблись!</string>
+    <string name="action_new_refresh">Начать заново</string>
+    <string name="action_share_input_result">Поделиться резултатом</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
