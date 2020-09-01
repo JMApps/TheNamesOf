@@ -13,6 +13,7 @@ import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityInputBinding
 import jmapps.thenamesof.ui.input.adapter.InputContentPagerAdapter
 import jmapps.thenamesof.ui.input.fragments.InputContainerFragment
+import jmapps.thenamesof.ui.input.fragments.InputFragment
 
 class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPosition {
 
@@ -20,6 +21,8 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
 
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
+
+    private var inputMode: Boolean? = null
 
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,15 +35,18 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         editor = preferences.edit()
 
-        val inputContentPagerAdapter = InputContentPagerAdapter(this)
+        inputMode = intent.getBooleanExtra(InputFragment.keyInputCategoryState, true)
+
+        val inputContentPagerAdapter = InputContentPagerAdapter(this, inputMode!!)
         binding.inputContentViewPager.adapter = inputContentPagerAdapter
         binding.inputContentViewPager.isUserInputEnabled = false
+
         TabLayoutMediator(binding.inputContentTabLayout, binding.inputContentViewPager) { tab, position ->
             tab.view.isClickable = false
             tab.text = (position + 1).toString()
         }.attach()
 
-        loadLastPagerPosition()
+        loadLastPagerPosition(inputMode!!)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,7 +58,11 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         when (item.itemId) {
             android.R.id.home -> finish()
 
-            R.id.action_settings_content -> {
+            R.id.action_refresh_input_content -> {
+
+            }
+
+            R.id.action_share_input_content -> {
 
             }
         }
@@ -63,8 +73,13 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         binding.inputContentViewPager.currentItem = position
     }
 
-    private fun loadLastPagerPosition() {
-        val lastPosition = preferences.getInt(InputContainerFragment.keyLastInputData, 0)
-        binding.inputContentViewPager.setCurrentItem(lastPosition, false)
+    private fun loadLastPagerPosition(inputMode: Boolean) {
+        if (inputMode) {
+            val lastPositionArabic = preferences.getInt(InputContainerFragment.keyLastInputDataArabic, 0)
+            binding.inputContentViewPager.setCurrentItem(lastPositionArabic, false)
+        } else {
+            val lastPositionTranslation = preferences.getInt(InputContainerFragment.keyLastInputDataTranslation, 0)
+            binding.inputContentViewPager.setCurrentItem(lastPositionTranslation, false)
+        }
     }
 }

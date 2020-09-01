@@ -26,10 +26,12 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentInputContainerBinding
     private var database: SQLiteDatabase? = null
 
-    private var sectionNumber: Int? = 0
+    private var sectionNumber: Int? = null
+    private var inputMode: Boolean? = null
     private var mediaPlayer: MediaPlayer? = null
 
-    private var trueValue: Int? = null
+    private var trueValueArabic = 0
+    private var trueValueTranslation = 0
 
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
@@ -39,15 +41,21 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
 
     companion object {
 
-        private const val ARG_CONTENT_NUMBER = "input_number"
-        const val keyLastInputData = "key_last_input_data"
-        const val keyTrueInputData = "key_true_input_data"
+        private const val ARG_CONTENT_NUMBER = "key_input_number"
+        private const val ARG_LANGUAGE_MODE = "key_language_mode"
+
+        const val keyLastInputDataArabic = "key_last_input_data_arabic"
+        const val keyLastInputDataTranslation = "key_last_input_data_translation"
+
+        const val keyTrueInputDataArabic = "key_true_input_data_arabic"
+        const val keyTrueInputDataTranslation = "key_true_input_data_translation"
 
         @JvmStatic
-        fun newInstance(dataNumber: Int): InputContainerFragment {
+        fun newInstance(dataNumber: Int, inputMode: Boolean): InputContainerFragment {
             return InputContainerFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_CONTENT_NUMBER, dataNumber)
+                    putBoolean(ARG_LANGUAGE_MODE, inputMode)
                 }
             }
         }
@@ -64,14 +72,22 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_input_container, container, false)
         sectionNumber = arguments?.getInt(ARG_CONTENT_NUMBER)
+        inputMode = arguments?.getBoolean(ARG_LANGUAGE_MODE)
 
         preferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         editor = preferences.edit()
 
-        binding.tvInputName.text = flipNameList[sectionNumber!! - 1].flipNameArabic
+        if (inputMode!!) {
+            binding.tvInputName.text = flipNameList[sectionNumber!! - 1].flipNameArabic
+        } else {
+            binding.tvInputName.text = flipNameList[sectionNumber!! - 1].flipNameTranslation
+        }
 
-        trueValue = preferences.getInt(keyTrueInputData, 0)
-        Toast.makeText(requireContext(), "$trueValue", Toast.LENGTH_SHORT).show()
+        trueValueArabic = preferences.getInt(keyTrueInputDataArabic, 0)
+        trueValueTranslation = preferences.getInt(keyTrueInputDataTranslation, 0)
+
+//        Toast.makeText(requireContext(), "Arabic = $trueValueArabic", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(requireContext(), "Translation = $trueValueTranslation", Toast.LENGTH_SHORT).show()
 
         binding.ibtnPlayInputName.setOnClickListener(this)
         binding.ibtnToNextInputName.setOnClickListener(this)
@@ -81,13 +97,12 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-
             R.id.ibtnPlayInputName -> {
                 playName()
             }
 
             R.id.ibtnToNextInputName -> {
-                toNextInputName()
+                toNextInputName(inputMode!!)
             }
         }
     }
@@ -122,21 +137,32 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
         mediaPlayer = null
     }
 
-    private fun toNextInputName() {
-        if (editTextIsNull()) {
-            binding.tvWriteInputNameState.text = binding.etInputName.text
-            saveInputData()
-            closeKeyboard()
+    private fun toNextInputName(inputMode: Boolean) {
+        if (!binding.etInputName.text.isNullOrEmpty()) {
+            saveInputData(inputMode)
             checkInput()
+            closeKeyboard()
+            binding.tvWriteInputNameState.text = binding.etInputName.text.toString()
             binding.etInputName.text.clear()
             invisibleInputViews()
         } else {
-            Toast.makeText(requireContext(), "Введите текст", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.action_add_text), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun editTextIsNull(): Boolean {
-        return !binding.etInputName.text.isNullOrEmpty()
+    private fun saveInputData(inputMode: Boolean) {
+        val current = flipNameList[sectionNumber!! - 1]
+        if (inputMode) {
+            if (binding.etInputName.text.toString() == current.flipNameTranslation) {
+                editor.putInt(keyTrueInputDataArabic, trueValueArabic + 1).apply()
+            }
+            editor.putInt(keyLastInputDataArabic, sectionNumber!!).apply()
+        } else {
+            if (binding.etInputName.text.toString() == current.flipNameArabic) {
+                editor.putInt(keyTrueInputDataTranslation, trueValueTranslation + 1).apply()
+            }
+            editor.putInt(keyLastInputDataTranslation, sectionNumber!!).apply()
+        }
     }
 
     private fun closeKeyboard() {
@@ -146,20 +172,15 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
     }
 
     private fun checkInput() {
-        if (binding.etInputName.text.toString() == flipNameList[sectionNumber!! - 1].flipNameTranslation) {
+        val current = flipNameList[sectionNumber!! - 1]
+        if (binding.etInputName.text.toString() == current.flipNameTranslation ||
+            binding.etInputName.text.toString() == current.flipNameArabic) {
             binding.tvCheckInputTrue.visibility = View.VISIBLE
             binding.tvCheckInputFalse.visibility = View.GONE
         } else {
-            binding.tvCheckInputFalse.visibility = View.VISIBLE
             binding.tvCheckInputTrue.visibility = View.GONE
+            binding.tvCheckInputFalse.visibility = View.VISIBLE
         }
-    }
-
-    private fun saveInputData() {
-        if (binding.etInputName.text.toString() == flipNameList[sectionNumber!! - 1].flipNameTranslation) {
-            editor.putInt(keyTrueInputData, trueValue!! + 1).apply()
-        }
-        editor.putInt(keyLastInputData, sectionNumber!!).apply()
     }
 
     private fun invisibleInputViews() {
