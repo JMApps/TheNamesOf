@@ -34,7 +34,7 @@ class OtherPresenterImpl(
     override fun shareAppLink() {
         val shareLink = Intent(Intent.ACTION_SEND)
         shareLink.type = "text/plain"
-        shareLink.putExtra(Intent.EXTRA_TEXT, appLink).toString()
+        shareLink.putExtra(Intent.EXTRA_TEXT, "Толкование прекрасных имён Аллаха\n$appLink").toString()
         context?.startActivity(shareLink)
     }
 }
