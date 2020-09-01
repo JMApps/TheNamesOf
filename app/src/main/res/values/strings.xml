@@ -42,8 +42,8 @@
     <string name="nav_title_main">Толкование имён</string>
     <string name="nav_title_card">Карточки</string>
     <string name="nav_title_all_names">Список имён</string>
-    <string name="nav_title_input">Ввод имён</string>
-    <string name="nav_title_quiz">Викторина</string>
+    <string name="nav_title_input">Ввод имён (бета)</string>
+    <string name="nav_title_quiz">Викторина (бета)</string>
     <string name="nav_title_additionally">Дополнительно</string>
     <string name="nav_title_download_audio">Скачать все аудио</string>
     <string name="nav_title_donate">Поддержать проект</string>

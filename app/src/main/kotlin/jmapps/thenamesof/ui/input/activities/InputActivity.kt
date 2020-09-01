@@ -1,6 +1,7 @@
 package jmapps.thenamesof.ui.input.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -59,11 +60,11 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
             android.R.id.home -> finish()
 
             R.id.action_refresh_input_content -> {
-
+                refreshInput()
             }
 
             R.id.action_share_input_content -> {
-
+                shareInputStats(inputMode!!)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -81,5 +82,35 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
             val lastPositionTranslation = preferences.getInt(InputContainerFragment.keyLastInputDataTranslation, 0)
             binding.inputContentViewPager.setCurrentItem(lastPositionTranslation, false)
         }
+    }
+
+    private fun refreshInput() {
+        editor.putInt(InputContainerFragment.keyTrueInputDataArabic, 0).apply()
+        editor.putInt(InputContainerFragment.keyTrueInputDataTranslation, 0).apply()
+        editor.putInt(InputContainerFragment.keyLastInputDataArabic, 0).apply()
+        editor.putInt(InputContainerFragment.keyLastInputDataTranslation, 0).apply()
+        binding.inputContentViewPager.currentItem = 0
+    }
+
+    private fun shareInputStats(inputMode: Boolean) {
+        val linkApp = "https://play.google.com/store/apps/details?id=jmapps.thenamesof"
+
+        val trueValueArabic = preferences.getInt(InputContainerFragment.keyTrueInputDataArabic, 0)
+        val trueValueTranslation = preferences.getInt(InputContainerFragment.keyTrueInputDataTranslation, 0)
+
+        if (inputMode) {
+            shareMode("Из 99 прекрасных имён Аллаха, на русском языке мне удалось ввести правильно – " +
+                    "$trueValueArabic\n\nПроверь, сколько сможешь ты?\n$linkApp")
+        } else {
+            shareMode("Из 99 прекрасных имён Аллаха, на арабском языке мне удалось ввести правильно – " +
+                    "$trueValueTranslation\n\nПроверь, сколько сможешь ты?\n$linkApp")
+        }
+    }
+
+    private fun shareMode(shareText: String) {
+        val shareContent = Intent(Intent.ACTION_SEND)
+        shareContent.type = "text/plain"
+        shareContent.putExtra(Intent.EXTRA_TEXT, shareText).toString()
+        startActivity(shareContent)
     }
 }
