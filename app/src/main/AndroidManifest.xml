@@ -35,6 +35,11 @@
             android:name=".ui.input.activities.InputActivity"
             android:label="@string/action_input_type"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.quiz.activities.QuizActivity"
+            android:label="@string/action_quiz"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@
     <string name="action_name_in_transcription">Транскрипция</string>
     <string name="action_name_in_translation">На русском</string>
     <string name="action_input_categories">Выберите категорию ввода…</string>
+    <string name="action_quiz_categories">Выберите категорию викторины…</string>
     <string name="action_arabic">Арабский</string>
     <string name="action_russian">Русский</string>
     <string name="action_input_type">Режим ввода</string>
@@ -32,7 +33,7 @@
     <string name="action_false">Правильно!</string>
     <string name="action_true">Вы ошиблись!</string>
     <string name="action_new_refresh">Начать заново</string>
-    <string name="action_share_input_result">Поделиться резултатом</string>
+    <string name="action_share_input_result">Поделиться результатом</string>
     <string name="action_about_us">О нас</string>
     <string name="action_donate_project">Поддержать проект</string>
     <string name="action_refresh">Обнулено</string>
@@ -74,4 +75,5 @@
         За реквизитами пишите нам на почту:
         JMAppsMuslim@gmail.com или в Telegram: t.me/dev_muslim
     </string>
+    <string name="action_quiz">Викторина</string>
 </resources>

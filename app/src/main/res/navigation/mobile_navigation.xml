@@ -32,6 +32,6 @@
 
     <fragment
         android:id="@+id/nav_quiz"
-        android:name="jmapps.thenamesof.ui.quiz.QuizFragment"
+        android:name="jmapps.thenamesof.ui.quiz.fragments.QuizFragment"
         tools:layout="@layout/fragment_quiz" />
 </navigation>
