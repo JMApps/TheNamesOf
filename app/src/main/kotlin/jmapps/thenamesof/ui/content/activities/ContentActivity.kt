@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
+import jmapps.LockOrientation
 import jmapps.thenamesof.R
 import jmapps.thenamesof.data.database.ContentList
 import jmapps.thenamesof.data.database.DBOpenContent
@@ -25,6 +26,8 @@ class ContentActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_content)
         setSupportActionBar(binding.toolbar)
+
+        LockOrientation(this).lock()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

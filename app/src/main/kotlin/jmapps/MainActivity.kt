@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.appBarMain.toolbar)
 
+        LockOrientation(this).lock()
+
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         editor = preferences.edit()
 

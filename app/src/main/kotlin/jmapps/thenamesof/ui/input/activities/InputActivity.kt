@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
 import com.google.android.material.tabs.TabLayoutMediator
+import jmapps.LockOrientation
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityInputBinding
 import jmapps.thenamesof.ui.input.adapter.InputContentPagerAdapter
@@ -31,6 +32,8 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_input)
         setSupportActionBar(binding.toolbar)
+
+        LockOrientation(this).lock()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

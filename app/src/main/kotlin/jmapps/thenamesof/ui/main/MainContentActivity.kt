@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.AppBarLayout
+import jmapps.LockOrientation
 import jmapps.thenamesof.R
 import jmapps.thenamesof.databinding.ActivityMainContentBinding
 import jmapps.thenamesof.ui.main.adapter.MainContentPagerAdapter
@@ -34,6 +35,8 @@ class MainContentActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main_content)
         setSupportActionBar(binding.toolbar)
+
+        LockOrientation(this).lock()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mainChapterId = intent.getIntExtra(keyMainChapterId, 1) - 1
