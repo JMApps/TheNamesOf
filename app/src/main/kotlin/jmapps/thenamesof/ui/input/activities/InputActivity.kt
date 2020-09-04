@@ -34,7 +34,6 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         setSupportActionBar(binding.toolbar)
 
         LockOrientation(this).lock()
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -46,7 +45,9 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         binding.inputContentViewPager.adapter = inputContentPagerAdapter
         binding.inputContentViewPager.isUserInputEnabled = false
 
-        TabLayoutMediator(binding.inputContentTabLayout, binding.inputContentViewPager) { tab, position ->
+        TabLayoutMediator(
+            binding.inputContentTabLayout,
+            binding.inputContentViewPager) { tab, position ->
             tab.view.isClickable = false
             tab.text = (position + 1).toString()
         }.attach()
@@ -80,10 +81,12 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
 
     private fun loadLastPagerPosition(inputMode: Boolean) {
         if (inputMode) {
-            val lastPositionArabic = preferences.getInt(InputContainerFragment.keyLastInputDataArabic, 0)
+            val lastPositionArabic =
+                preferences.getInt(InputContainerFragment.keyLastInputDataArabic, 0)
             binding.inputContentViewPager.setCurrentItem(lastPositionArabic, false)
         } else {
-            val lastPositionTranslation = preferences.getInt(InputContainerFragment.keyLastInputDataTranslation, 0)
+            val lastPositionTranslation =
+                preferences.getInt(InputContainerFragment.keyLastInputDataTranslation, 0)
             binding.inputContentViewPager.setCurrentItem(lastPositionTranslation, false)
         }
     }
@@ -101,14 +104,17 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         val linkApp = "https://play.google.com/store/apps/details?id=jmapps.thenamesof"
 
         val trueValueArabic = preferences.getInt(InputContainerFragment.keyTrueInputDataArabic, 0)
-        val trueValueTranslation = preferences.getInt(InputContainerFragment.keyTrueInputDataTranslation, 0)
+        val trueValueTranslation =
+            preferences.getInt(InputContainerFragment.keyTrueInputDataTranslation, 0)
 
         if (inputMode) {
             shareMode("Из 99 прекрасных имён Аллаха, на русском языке мне удалось ввести правильно – " +
-                    "$trueValueArabic\n\nПроверь, сколько сможешь ты?\n$linkApp")
+                        "$trueValueArabic\n\nПроверь, сколько сможешь ты?\n$linkApp"
+            )
         } else {
             shareMode("Из 99 прекрасных имён Аллаха, на арабском языке мне удалось ввести правильно – " +
-                    "$trueValueTranslation\n\nПроверь, сколько сможешь ты?\n$linkApp")
+                        "$trueValueTranslation\n\nПроверь, сколько сможешь ты?\n$linkApp"
+            )
         }
     }
 

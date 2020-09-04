@@ -30,20 +30,14 @@ class InputFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-
-            R.id.btnInputArabicCategory -> {
-                toInputActivity(true)
-            }
-
-            R.id.btnInputRussianCategory -> {
-                toInputActivity(false)
-            }
+            R.id.btnInputArabicCategory -> toInputActivity(true)
+            R.id.btnInputRussianCategory -> toInputActivity(false)
         }
     }
 
     private fun toInputActivity(categoryState: Boolean) {
-        val toArabicCategory = Intent(requireContext(), InputActivity::class.java)
-        toArabicCategory.putExtra(keyInputCategoryState, categoryState)
-        startActivity(toArabicCategory)
+        val toInputCategoryActivity = Intent(requireContext(), InputActivity::class.java)
+        toInputCategoryActivity.putExtra(keyInputCategoryState, categoryState)
+        startActivity(toInputCategoryActivity)
     }
 }
