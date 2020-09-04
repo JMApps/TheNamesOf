@@ -1,22 +1,18 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="fontFamily">@font/medium</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
-    </style>
-
-    <style name="AppTheme.Main">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/mainBackgroundColor</item>
     </style>
 
     <style name="AppTheme.Content">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <!--    Splash screen theme-->

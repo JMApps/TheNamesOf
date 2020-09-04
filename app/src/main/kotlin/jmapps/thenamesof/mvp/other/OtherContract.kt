@@ -4,12 +4,17 @@ interface OtherContract {
 
     interface OtherView {
 
+        fun darkTheme(themeMode: Boolean)
+
         fun donateProject()
 
         fun aboutUs()
     }
 
     interface OtherPresenter {
+
+        fun darkTheme(themeMode: Boolean)
+
         fun downloadAllAudios()
 
         fun donateProject()

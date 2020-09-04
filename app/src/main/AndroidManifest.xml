@@ -21,20 +21,20 @@
         <activity
             android:name="jmapps.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.Main" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.content.activities.ContentActivity"
             android:label="@string/action_content"
-            android:theme="@style/AppTheme.Content" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.main.MainContentActivity"
             android:label="@string/action_main_content"
-            android:theme="@style/AppTheme.Content" />
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.input.activities.InputActivity"
             android:label="@string/action_input_type"
-            android:theme="@style/AppTheme.Content" />
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

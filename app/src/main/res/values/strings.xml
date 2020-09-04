@@ -3,6 +3,9 @@
     <string name="action_content">Основной материал</string>
     <string name="action_main_content">Толкование имён</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <!--    Main-->
     <string name="action_night_mode">Ночной режим</string>
     <string name="action_settings">Настройки</string>
@@ -32,9 +35,6 @@
     <string name="action_share_input_result">Поделиться резултатом</string>
     <string name="action_about_us">О нас</string>
     <string name="action_donate_project">Поддержать проект</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!--    Settings-->
     <string name="description_text_size">Размер текста</string>

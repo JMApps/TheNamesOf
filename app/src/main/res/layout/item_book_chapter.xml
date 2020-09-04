@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="3dp"
+    app:cardBackgroundColor="@color/cardViewBackgroundColor"
     app:cardElevation="3dp">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -20,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:textColor="@color/colorAccent"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textStyle="bold"
             tools:text="1" />
 
@@ -28,7 +29,7 @@
             android:id="@+id/tvContentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/main"
             android:textSize="18sp"
             tools:text="Название главы" />
     </androidx.appcompat.widget.LinearLayoutCompat>

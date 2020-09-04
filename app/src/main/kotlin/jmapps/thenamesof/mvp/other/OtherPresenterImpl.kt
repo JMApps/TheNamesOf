@@ -11,6 +11,10 @@ class OtherPresenterImpl(
     private val downloadLink = "https://drive.google.com/uc?export=download&id=15CJJgenAE29MByDshbhnn_PgOrnVoVxZ"
     private val appLink = "https://play.google.com/store/apps/details?id=jmapps.thenamesof"
 
+    override fun darkTheme(themeMode: Boolean) {
+        otherView?.darkTheme(themeMode)
+    }
+
     override fun downloadAllAudios() {
         val downloadAudios = Intent(Intent.ACTION_VIEW)
         downloadAudios.data = Uri.parse(downloadLink)

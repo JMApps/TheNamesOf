@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -29,16 +30,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var otherPresenterImpl: OtherPresenterImpl
 
+    private var valNightMode: Boolean = false
+    private lateinit var itemNightMode: MenuItem
+
+    companion object {
+        const val keyNightTheme = "key_night_theme"
+    }
+
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        otherPresenterImpl = OtherPresenterImpl(this, this)
-
         preferences = PreferenceManager.getDefaultSharedPreferences(this)
         editor = preferences.edit()
+
+        valNightMode = preferences.getBoolean(keyNightTheme, valNightMode)
+        darkTheme(valNightMode)
+
+        otherPresenterImpl = OtherPresenterImpl(this, this)
 
         val toggle = ActionBarDrawerToggle(
             this,
@@ -65,13 +76,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
+        itemNightMode = menu.findItem(R.id.action_night_mode)
+        itemNightMode.isChecked = valNightMode
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.action_night_mode -> {
+                otherPresenterImpl.darkTheme(!item.isChecked)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.main_fragment_container)
         when (item.itemId) {
-
             R.id.nav_book_content -> navController.navigate(R.id.nav_book_content)
 
             R.id.nav_names_content -> navController.navigate(R.id.nav_names_content)
@@ -98,13 +121,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    override fun darkTheme(themeMode: Boolean) {
+        if (themeMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        saveThemeMode(themeMode)
+    }
+
     override fun donateProject() {
         val donateProjectBottomSheet = DonateProjectBottomSheet()
-        donateProjectBottomSheet.show(supportFragmentManager, DonateProjectBottomSheet.keyDonateProject)
+        donateProjectBottomSheet.show(
+            supportFragmentManager,
+            DonateProjectBottomSheet.keyDonateProject
+        )
     }
 
     override fun aboutUs() {
         val aboutUsBottomSheet = AboutUsBottomSheet()
         aboutUsBottomSheet.show(supportFragmentManager, AboutUsBottomSheet.keyAboutUs)
+    }
+
+    private fun saveThemeMode(themeModeKey: Boolean) {
+        editor.putBoolean(keyNightTheme, themeModeKey).apply()
     }
 }

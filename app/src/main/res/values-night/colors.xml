@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#253640</color>
+    <color name="colorPrimaryDark">#253640</color>
+    <color name="colorAccent">#4CAF50</color>
+
+    <color name="mainBackgroundColor">#324855</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#222222</color>
+    <color name="main">#FFFFFF</color>
+    <color name="reMain">#222222</color>
+
+    <color name="rightColor">#4CAF50</color>
+    <color name="errorColor">#E91E63</color>
+
+    <color name="nameArabicColor">#4CAF50</color>
+    <color name="nameTranslationColor">#00BCD4</color>
+
+    <color name="cardViewBackgroundColor">#253640</color>
+    <color name="cardViewDarkBackgroundColor">#385260</color>
+
+    <color name="tabSelectedTextColor">#1B5E20</color>
+</resources>

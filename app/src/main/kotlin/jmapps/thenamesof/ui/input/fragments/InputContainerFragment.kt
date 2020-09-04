@@ -143,7 +143,7 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
             checkInput()
             closeKeyboard()
             binding.tvWriteInputNameState.text = binding.etInputName.text.toString()
-            binding.etInputName.text.clear()
+            binding.etInputName.text!!.clear()
             invisibleInputViews()
         } else {
             Toast.makeText(requireContext(), getString(R.string.action_add_text), Toast.LENGTH_SHORT).show()
