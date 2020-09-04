@@ -19,12 +19,12 @@
             android:scrollbarThumbVertical="@drawable/thumb_line_background"
             android:scrollbars="vertical">
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorAccent"
@@ -32,7 +32,7 @@
                     android:orientation="horizontal"
                     android:padding="8dp">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvChapterNumber"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 
-                    <ToggleButton
+                    <androidx.appcompat.widget.AppCompatToggleButton
                         android:id="@+id/tbFavoriteMainChapter"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -51,20 +51,20 @@
                         android:textOff=""
                         android:textOn="" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnCopyMainContent"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="16dp"
                         android:background="@drawable/state_copy" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnShareMainContent"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/state_share" />
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvMainNames"
@@ -87,7 +87,7 @@
                     app:cardCornerRadius="25dp"
                     app:cardElevation="2dp">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvChapterContent"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -97,7 +97,7 @@
                         android:paddingBottom="24dp"
                         android:textSize="18sp" />
                 </androidx.cardview.widget.CardView>
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

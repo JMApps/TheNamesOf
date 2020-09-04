@@ -19,6 +19,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
+            app:cardBackgroundColor="@color/cardViewBackgroundColor"
             app:cardCornerRadius="25dp"
             app:cardElevation="3dp"
             app:layout_constraintBottom_toTopOf="@+id/etInputName"
@@ -30,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/ibtnPlayInputName"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -41,7 +42,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/state_volume" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvInputName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -58,7 +59,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.3" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvWriteInputNameState"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -73,7 +74,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvInputName" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvCheckInputFalse"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -83,7 +84,7 @@
                     android:gravity="center"
                     android:padding="16dp"
                     android:text="@string/action_true"
-                    android:textColor="@color/red"
+                    android:textColor="@color/errorColor"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:visibility="gone"
@@ -91,7 +92,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvWriteInputNameState" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvCheckInputTrue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -101,7 +102,7 @@
                     android:gravity="center"
                     android:padding="16dp"
                     android:text="@string/action_false"
-                    android:textColor="@color/green"
+                    android:textColor="@color/rightColor"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:visibility="gone"
@@ -111,7 +112,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etInputName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -131,9 +132,9 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <requestFocus />
-        </EditText>
+        </androidx.appcompat.widget.AppCompatEditText>
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/ibtnToNextInputName"
             android:layout_width="50dp"
             android:layout_height="50dp"

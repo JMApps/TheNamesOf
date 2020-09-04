@@ -5,12 +5,12 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ProgressBar
+        <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/pbReadProgress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
@@ -23,12 +23,12 @@
             android:scrollbarThumbVertical="@drawable/thumb_line_background"
             android:scrollbars="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvContentText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="16dp"
                 android:textIsSelectable="true" />
         </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

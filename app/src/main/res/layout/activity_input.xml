@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/lightPrimary"
+                app:tabSelectedTextColor="@color/tabSelectedTextColor"
                 app:tabTextColor="@color/white" />
         </com.google.android.material.appbar.AppBarLayout>
 

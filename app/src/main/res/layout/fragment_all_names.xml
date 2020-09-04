@@ -12,5 +12,5 @@
         android:layout_height="match_parent"
         android:scrollbarThumbVertical="@drawable/thumb_line_background"
         android:scrollbars="vertical"
-        tools:listitem="@layout/item_all_name"/>
+        tools:listitem="@layout/item_all_name" />
 </layout>

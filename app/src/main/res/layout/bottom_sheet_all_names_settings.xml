@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/rounded_bottom_sheet">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvContentTextSizeDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivTextSizeIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvContentTextSizeDescription"
             app:srcCompat="@drawable/ic_text_size" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/sbAllNameTextSize"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="0dp"
@@ -49,7 +49,7 @@
             app:layout_constraintStart_toEndOf="@+id/ivTextSizeIcon"
             app:layout_constraintTop_toTopOf="@+id/ivTextSizeIcon" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAllNameTextSizeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

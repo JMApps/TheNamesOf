@@ -8,7 +8,7 @@
     app:cardCornerRadius="25dp"
     app:cardElevation="3dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edging_flip_two_card"
@@ -16,7 +16,7 @@
         android:minHeight="120dp"
         android:orientation="horizontal">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFlipTranslationNameNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,14 +28,14 @@
             android:visibility="gone"
             tools:text="1" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFlipTranslationName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/nameTranslationColor"
             tools:text="Первый" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

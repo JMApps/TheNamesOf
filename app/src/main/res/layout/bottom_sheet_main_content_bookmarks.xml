@@ -6,14 +6,14 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rounded_bottom_sheet"
         android:minHeight="1500dp"
         android:orientation="vertical">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDescriptionMainChapters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:textSize="18sp"
             app:drawableStartCompat="@drawable/ic_bookmarks" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/llBookmarkListIsEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,19 +32,19 @@
             android:minHeight="1500dp"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@drawable/ic_bookmarks_big" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="16dp"
                 android:text="@string/action_bookmarks_empty"
                 android:textSize="18sp" />
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMainBookmarks"
@@ -52,5 +52,5 @@
             android:layout_height="match_parent"
             android:scrollbarThumbVertical="@drawable/thumb_line_background"
             android:scrollbars="vertical" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

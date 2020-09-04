@@ -7,14 +7,14 @@
     android:layout_margin="3dp"
     app:cardElevation="3dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackgroundBorderless"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvContentNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,12 +24,12 @@
             android:textStyle="bold"
             tools:text="1" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvContentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="18sp"
             tools:text="Название главы" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

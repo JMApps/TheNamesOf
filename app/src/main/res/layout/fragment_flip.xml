@@ -6,13 +6,13 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
@@ -20,7 +20,7 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <ToggleButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:id="@+id/tbChangeCardMode"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -31,7 +31,7 @@
                 android:textOff=""
                 android:textOn="" />
 
-            <ToggleButton
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:id="@+id/tbFlipAudioState"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -40,7 +40,7 @@
                 android:text=""
                 android:textOff=""
                 android:textOn="" />
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFlipListNames"
@@ -49,5 +49,5 @@
             android:scrollbarThumbVertical="@drawable/thumb_line_background"
             android:scrollbars="vertical"
             tools:listitem="@layout/item_flip_name_ar" />
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

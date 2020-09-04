@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.quiz.QuizFragment">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/mainTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

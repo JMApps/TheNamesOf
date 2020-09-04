@@ -12,19 +12,19 @@
         android:layout_height="match_parent"
         android:background="?selectableItemBackgroundBorderless">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAllArabicName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/nameArabicColor"
             app:layout_constraintEnd_toStartOf="@+id/ivPlayAllName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAllTranscriptionName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAllArabicName" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAllTranslationName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -43,13 +43,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/nameTranslationColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivPlayAllName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAllTranscriptionName" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivPlayAllName"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -59,7 +59,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btnShareNames"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnShareNames"
             android:layout_width="25dp"
             android:layout_height="25dp"
