@@ -86,9 +86,6 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
         trueValueArabic = preferences.getInt(keyTrueInputDataArabic, 0)
         trueValueTranslation = preferences.getInt(keyTrueInputDataTranslation, 0)
 
-//        Toast.makeText(requireContext(), "Arabic = $trueValueArabic", Toast.LENGTH_SHORT).show()
-//        Toast.makeText(requireContext(), "Translation = $trueValueTranslation", Toast.LENGTH_SHORT).show()
-
         binding.ibtnPlayInputName.setOnClickListener(this)
         binding.ibtnToNextInputName.setOnClickListener(this)
 
@@ -184,10 +181,12 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
     }
 
     private fun invisibleInputViews() {
-        binding.etInputName.visibility = View.GONE
-        binding.ibtnToNextInputName.visibility = View.GONE
-        Handler().postDelayed({
-            toNextPagerPosition.nextPagerPosition(sectionNumber!!)
-        }, 2500)
+        if (sectionNumber!! < 99) {
+            binding.etInputName.visibility = View.GONE
+            binding.ibtnToNextInputName.visibility = View.GONE
+            Handler().postDelayed({
+                toNextPagerPosition.nextPagerPosition(sectionNumber!!)
+            }, 2500)
+        }
     }
 }
