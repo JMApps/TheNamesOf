@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.preference.PreferenceManager
@@ -90,6 +91,7 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         editor.putInt(InputContainerFragment.keyLastInputDataArabic, 0).apply()
         editor.putInt(InputContainerFragment.keyLastInputDataTranslation, 0).apply()
         binding.inputContentViewPager.currentItem = 0
+        Toast.makeText(this, getString(R.string.action_refresh), Toast.LENGTH_SHORT).show()
     }
 
     private fun shareInputStats(inputMode: Boolean) {

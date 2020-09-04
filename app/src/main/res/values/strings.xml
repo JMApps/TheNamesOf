@@ -35,6 +35,7 @@
     <string name="action_share_input_result">Поделиться резултатом</string>
     <string name="action_about_us">О нас</string>
     <string name="action_donate_project">Поддержать проект</string>
+    <string name="action_refresh">Обнулено</string>
 
     <!--    Settings-->
     <string name="description_text_size">Размер текста</string>
