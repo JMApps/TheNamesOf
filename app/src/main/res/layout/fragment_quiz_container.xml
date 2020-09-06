@@ -11,9 +11,9 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -22,9 +22,35 @@
             app:cardCornerRadius="25dp"
             app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="32dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMainQuizName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="16dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvQuizVariables"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

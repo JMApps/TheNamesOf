@@ -43,7 +43,7 @@ class QuizActivity : AppCompatActivity(), QuizContainerFragment.ToNextPagerPosit
 
         val quizContentPagerAdapter = QuizContentPagerAdapter(this, quizMode!!)
         binding.quizContentViewPager.adapter = quizContentPagerAdapter
-        binding.quizContentViewPager.isUserInputEnabled = false
+        //binding.quizContentViewPager.isUserInputEnabled = false
 
         TabLayoutMediator(
             binding.quizContentTabLayout,
@@ -81,12 +81,10 @@ class QuizActivity : AppCompatActivity(), QuizContainerFragment.ToNextPagerPosit
 
     private fun loadLastPagerPosition(quizMode: Boolean) {
         if (quizMode) {
-            val lastPositionArabic =
-                preferences.getInt(QuizContainerFragment.keyLastQuizDataArabic, 0)
+            val lastPositionArabic = preferences.getInt(QuizContainerFragment.keyLastQuizDataArabic, 0)
             binding.quizContentViewPager.setCurrentItem(lastPositionArabic, false)
         } else {
-            val lastPositionTranslation =
-                preferences.getInt(QuizContainerFragment.keyLastQuizDataTranslation, 0)
+            val lastPositionTranslation = preferences.getInt(QuizContainerFragment.keyLastQuizDataTranslation, 0)
             binding.quizContentViewPager.setCurrentItem(lastPositionTranslation, false)
         }
     }
