@@ -7,10 +7,13 @@ import android.database.sqlite.SQLiteDatabase
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,7 +24,7 @@ import jmapps.thenamesof.data.database.DBOpenAllNames
 import jmapps.thenamesof.databinding.FragmentInputContainerBinding
 import jmapps.thenamesof.ui.flip.model.FlipListModel
 
-class InputContainerFragment : Fragment(), View.OnClickListener {
+class InputContainerFragment : Fragment(), View.OnClickListener, TextView.OnEditorActionListener {
 
     private lateinit var binding: FragmentInputContainerBinding
     private var database: SQLiteDatabase? = null
@@ -82,6 +85,7 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
         
         binding.ibtnPlayInputName.setOnClickListener(this)
         binding.ibtnToNextInputName.setOnClickListener(this)
+        binding.etInputName.setOnEditorActionListener(this)
 
         return binding.root
     }
@@ -185,5 +189,13 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
                 toNextPagerPosition.nextPagerPosition(sectionNumber!!)
             }, 2500)
         }
+    }
+
+    override fun onEditorAction(view: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            toNextInputName(inputMode!!)
+            return true
+        }
+        return false
     }
 }
