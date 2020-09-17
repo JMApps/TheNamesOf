@@ -104,8 +104,7 @@ class InputActivity : AppCompatActivity(), InputContainerFragment.ToNextPagerPos
         val linkApp = "https://play.google.com/store/apps/details?id=jmapps.thenamesof"
 
         val trueValueArabic = preferences.getInt(InputContainerFragment.keyTrueInputDataArabic, 0)
-        val trueValueTranslation =
-            preferences.getInt(InputContainerFragment.keyTrueInputDataTranslation, 0)
+        val trueValueTranslation = preferences.getInt(InputContainerFragment.keyTrueInputDataTranslation, 0)
 
         if (inputMode) {
             shareMode("Из 99 прекрасных имён Аллаха, на русском языке мне удалось ввести правильно – " +

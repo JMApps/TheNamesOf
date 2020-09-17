@@ -30,9 +30,6 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
     private var inputMode: Boolean? = null
     private var mediaPlayer: MediaPlayer? = null
 
-    private var trueValueArabic = 0
-    private var trueValueTranslation = 0
-
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
@@ -82,10 +79,7 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
         } else {
             binding.tvInputName.text = flipNameList[sectionNumber!! - 1].flipNameTranslation
         }
-
-        trueValueArabic = preferences.getInt(keyTrueInputDataArabic, 0)
-        trueValueTranslation = preferences.getInt(keyTrueInputDataTranslation, 0)
-
+        
         binding.ibtnPlayInputName.setOnClickListener(this)
         binding.ibtnToNextInputName.setOnClickListener(this)
 
@@ -148,6 +142,9 @@ class InputContainerFragment : Fragment(), View.OnClickListener {
     }
 
     private fun saveInputData(inputMode: Boolean) {
+        val trueValueArabic = preferences.getInt(keyTrueInputDataArabic, 0)
+        val trueValueTranslation = preferences.getInt(keyTrueInputDataTranslation, 0)
+
         val current = flipNameList[sectionNumber!! - 1]
         if (inputMode) {
             if (binding.etInputName.text.toString() == current.flipNameTranslation) {
