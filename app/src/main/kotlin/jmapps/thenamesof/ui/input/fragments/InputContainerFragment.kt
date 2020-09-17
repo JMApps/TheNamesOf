@@ -120,8 +120,7 @@ class InputContainerFragment : Fragment(), View.OnClickListener, TextView.OnEdit
 
     private fun playName() {
         clearPlayer()
-        val resId = context?.resources?.getIdentifier(
-            flipNameList[sectionNumber!! - 1].flipNameAudio, "raw", "jmapps.thenamesof")
+        val resId = context?.resources?.getIdentifier(flipNameList[sectionNumber!! - 1].flipNameAudio, "raw", "jmapps.thenamesof")
         mediaPlayer = MediaPlayer.create(context, resId!!)
         mediaPlayer?.start()
     }
@@ -164,8 +163,7 @@ class InputContainerFragment : Fragment(), View.OnClickListener, TextView.OnEdit
     }
 
     private fun closeKeyboard() {
-        val keyboard: InputMethodManager =
-            (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?)!!
+        val keyboard: InputMethodManager = (requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?)!!
         keyboard.hideSoftInputFromWindow(binding.etInputName.windowToken, 0)
     }
 
